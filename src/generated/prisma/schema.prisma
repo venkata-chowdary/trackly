@@ -25,6 +25,7 @@ model User {
   updatedAt       DateTime         @updatedAt
   applications    Application[]
   UserPreferences UserPreferences?
+  MailId          MailId[]
 }
 
 model Application {
@@ -55,4 +56,24 @@ model UserPreferences {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model MailId {
+  id     String     @id @default(cuid())
+  mailId String
+  status MailStatus @default(pending)
+
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([status])
+}
+
+enum MailStatus {
+  pending
+  processing
+  completed
+  error
 }

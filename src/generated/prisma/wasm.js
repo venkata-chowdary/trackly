@@ -154,6 +154,16 @@ exports.Prisma.UserPreferencesScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.MailIdScalarFieldEnum = {
+  id: 'id',
+  mailId: 'mailId',
+  threadId: 'threadId',
+  status: 'status',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -168,12 +178,18 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
-
+exports.MailStatus = exports.$Enums.MailStatus = {
+  pending: 'pending',
+  processing: 'processing',
+  completed: 'completed',
+  error: 'error'
+};
 
 exports.Prisma.ModelName = {
   User: 'User',
   Application: 'Application',
-  UserPreferences: 'UserPreferences'
+  UserPreferences: 'UserPreferences',
+  MailId: 'MailId'
 };
 
 /**
