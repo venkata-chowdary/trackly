@@ -1,5 +1,85 @@
-export async function GET(request) {
-    console.log("hello from server")
+import { db } from "@/lib/prisma";
+import { auth, clerkClient } from "@clerk/nextjs/server";
+import { NextResponse } from "next/server";
+import { GoogleGenAI } from "@google/genai";
+import { generatePrompt } from "@/lib/generatePrompt";
+import { extractEmailDetails } from "@/lib/extractEmailData";
 
-    return new Response("Cron job executed!", { status: 200 });
+function decodeGmailBody(base64url) {
+    // Helper function to convert base64url to base64
+    const base64urlToBase64 = (base64url) => {
+        return base64url
+            .replace(/-/g, '+')  // Replace "-" with "+"
+            .replace(/_/g, '/');  // Replace "_" with "/"
+    };
+
+    // Function to decode base64url encoded data
+    const decodeBase64url = (base64url) => {
+        const base64 = base64urlToBase64(base64url);
+        return atob(base64);  // Decode base64 to string
+    };
+
+    return decodeBase64url(base64url);  // Pass the base64url to decode directly
+}
+
+
+export async function GET(request) {
+
+    try {
+        const { userId } = await auth()
+
+        if (!userId) return new NextResponse(JSON.stringify({ message: "unauthorised request" }), { status: 401 });
+
+        const clerk = await clerkClient()
+        const clerkResponse = await clerk.users.getUserOauthAccessToken(userId, "google")
+        const googleAccessToken = clerkResponse.data[0]?.token
+
+        const user = await db.user.findUnique({
+            where: {
+                clerkUserId: userId
+            }
+        })
+
+        const pendingEmails = await db.mailId.findMany({
+            where: {
+                status: "pending",
+                userId: user.id
+            }
+        })
+
+        console.log("Pending Mails", pendingEmails?.length)
+        const emailDataPromise = pendingEmails.splice(0, 5).map(async (mail, index) => {
+            const gmailResponse = await fetch(
+                `https://gmail.googleapis.com/gmail/v1/users/me/messages/${mail.mailId}`,
+                {
+                    method: "GET",
+                    headers: {
+                        "Authorization": `Bearer ${googleAccessToken}`,
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+            if (!gmailResponse.ok) {
+                throw new Error('Failed to fetch Gmail data');
+            }
+            const gmailData = await gmailResponse.json();
+            const { emailBody, emailSnippet, emailSubject } = extractEmailDetails(gmailData)
+
+            console.log("Email Snippet", emailSnippet)
+            const ai = new GoogleGenAI({ apiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY });
+            const response = await ai.models.generateContent({
+                model: "gemini-2.0-flash",
+                contents: generatePrompt(emailBody, emailSnippet, emailSubject),
+            });
+            const rawResponse = response.candidates[0].content.parts[0].text
+            const cleanedResponse = rawResponse.replace(/^```json\n|\n```$/g, '');
+            console.log(JSON.parse(cleanedResponse))
+        })
+        const emailsData = await Promise.all(emailDataPromise)
+        return new NextResponse(JSON.stringify({ data: emailsData }), { status: 500 });
+    }
+    catch (error) {
+        console.error("Error in /api/fetch GET handler:", error);
+        return new NextResponse(JSON.stringify({ error: "Internal Server Error" }), { status: 500 });
+    }
 }

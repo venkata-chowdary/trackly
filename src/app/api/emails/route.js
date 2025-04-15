@@ -6,7 +6,6 @@ export async function GET(request) {
 
     try {
         const { userId } = await auth()
-        console.log(userId)
         const clerk = await clerkClient()
         const clerkResponse = await clerk.users.getUserOauthAccessToken(userId, "google")
         const googleAccessToken = clerkResponse.data[0]?.token
@@ -24,7 +23,6 @@ export async function GET(request) {
             orderBy: {
                 createdAt: "desc",
             },
-
         })
 
         // const lastMailTimeStamp = lastMail ? `&q=newer_than:${lastMail.createdAt}` : ""
