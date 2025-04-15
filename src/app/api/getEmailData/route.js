@@ -48,7 +48,7 @@ export async function GET(request) {
         })
 
         console.log("Pending Mails", pendingEmails?.length)
-        const emailDataPromise = pendingEmails.splice(0, 5).map(async (mail, index) => {
+        const emailDataPromise = pendingEmails.map(async (mail, index) => {
             const gmailResponse = await fetch(
                 `https://gmail.googleapis.com/gmail/v1/users/me/messages/${mail.mailId}`,
                 {
@@ -65,7 +65,7 @@ export async function GET(request) {
             const gmailData = await gmailResponse.json();
             const { emailBody, emailSnippet, emailSubject } = extractEmailDetails(gmailData)
 
-            console.log("Email Snippet", emailSnippet)
+            // console.log(`email ${index}'s data`, emailBody, emailSnippet, emailSubject)
             const ai = new GoogleGenAI({ apiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY });
             const response = await ai.models.generateContent({
                 model: "gemini-2.0-flash",
@@ -73,7 +73,7 @@ export async function GET(request) {
             });
             const rawResponse = response.candidates[0].content.parts[0].text
             const cleanedResponse = rawResponse.replace(/^```json\n|\n```$/g, '');
-            console.log(JSON.parse(cleanedResponse))
+            return JSON.parse(cleanedResponse)
         })
         const emailsData = await Promise.all(emailDataPromise)
         return new NextResponse(JSON.stringify({ data: emailsData }), { status: 500 });
