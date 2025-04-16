@@ -29,7 +29,7 @@ export async function GET(request) {
         // console.log("Last mail", lastMailTimeStamp)
 
         const gmailResponse = await fetch(
-            `https://gmail.googleapis.com/gmail/v1/users/me/messages?maxResults=10`,
+            `https://gmail.googleapis.com/gmail/v1/users/me/messages?maxResults=5`,
             {
                 method: "GET",
                 headers: {
@@ -45,7 +45,7 @@ export async function GET(request) {
         const gmailData = await gmailResponse.json();
         const messageIds = gmailData.messages
 
-        if (messageIds[0].id === lastMail.mailId) {
+        if (lastMail && messageIds[0].id === lastMail.mailId) {
             return new NextResponse(JSON.stringify({ message: "No latest emails to save" }), { status: 200 });
         }
 

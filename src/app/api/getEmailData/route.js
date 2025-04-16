@@ -5,21 +5,8 @@ import { GoogleGenAI } from "@google/genai";
 import { generatePrompt } from "@/lib/generatePrompt";
 import { extractEmailDetails } from "@/lib/extractEmailData";
 
-function decodeGmailBody(base64url) {
-    // Helper function to convert base64url to base64
-    const base64urlToBase64 = (base64url) => {
-        return base64url
-            .replace(/-/g, '+')  // Replace "-" with "+"
-            .replace(/_/g, '/');  // Replace "_" with "/"
-    };
+function saveMailToDatabase() {
 
-    // Function to decode base64url encoded data
-    const decodeBase64url = (base64url) => {
-        const base64 = base64urlToBase64(base64url);
-        return atob(base64);  // Decode base64 to string
-    };
-
-    return decodeBase64url(base64url);  // Pass the base64url to decode directly
 }
 
 
@@ -63,9 +50,9 @@ export async function GET(request) {
                 throw new Error('Failed to fetch Gmail data');
             }
             const gmailData = await gmailResponse.json();
-            const { emailBody, emailSnippet, emailSubject } = extractEmailDetails(gmailData)
+            const { emailBody, emailSnippet, emailSubject, emailContent } = extractEmailDetails(gmailData)
 
-            // console.log(`email ${index}'s data`, emailBody, emailSnippet, emailSubject)
+
             const ai = new GoogleGenAI({ apiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY });
             const response = await ai.models.generateContent({
                 model: "gemini-2.0-flash",
@@ -73,10 +60,22 @@ export async function GET(request) {
             });
             const rawResponse = response.candidates[0].content.parts[0].text
             const cleanedResponse = rawResponse.replace(/^```json\n|\n```$/g, '');
-            return JSON.parse(cleanedResponse)
+            // console.log(`email ${index}'s`, cleanedResponse)
+
+            return cleanedResponse
+            // return JSON.parse(cleanedResponse)
         })
-        const emailsData = await Promise.all(emailDataPromise)
-        return new NextResponse(JSON.stringify({ data: emailsData }), { status: 500 });
+        const jobApplicationData = await Promise.all(emailDataPromise)
+
+        jobApplicationData.map((application, index) => {
+            console.log(application, index)
+        })
+
+
+        //save if "job" and update status of mailId row
+        //move this logic to cron
+
+        return new NextResponse(JSON.stringify({ data: jobApplicationData }), { status: 500 });
     }
     catch (error) {
         console.error("Error in /api/fetch GET handler:", error);

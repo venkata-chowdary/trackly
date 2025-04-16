@@ -24,7 +24,7 @@ export const extractEmailDetails = (gmailResponse) => {
         emailSubject,
         emailSnippet,
         emailBody,
-        // emailContent
+        emailContent
     };
 };
 
