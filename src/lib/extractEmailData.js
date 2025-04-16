@@ -19,13 +19,18 @@ export const extractEmailDetails = (gmailResponse) => {
     // Decode the base64url encoded email body
     emailBody = decodeBase64Url(emailBody);
     emailContent = decodeBase64Url(emailContent);
+    const receivedDate = gmailResponse.internalDate
+        ? new Date(parseInt(gmailResponse.internalDate)).toISOString().split('T')[0]
+        : null;
 
     return {
         emailSubject,
         emailSnippet,
         emailBody,
-        emailContent
+        emailContent,
+        receivedDate // for use in appliedAt logic elsewhere
     };
+
 };
 
 // Helper function to get the header value by name

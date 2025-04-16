@@ -130,7 +130,7 @@ exports.Prisma.UserScalarFieldEnum = {
 
 exports.Prisma.ApplicationScalarFieldEnum = {
   id: 'id',
-  userId: 'userId',
+  userRefId: 'userRefId',
   jobTitle: 'jobTitle',
   company: 'company',
   jobId: 'jobId',
@@ -141,12 +141,13 @@ exports.Prisma.ApplicationScalarFieldEnum = {
   jobType: 'jobType',
   appliedAt: 'appliedAt',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  mailRefId: 'mailRefId'
 };
 
 exports.Prisma.UserPreferencesScalarFieldEnum = {
   id: 'id',
-  userId: 'userId',
+  userRefId: 'userRefId',
   syncFrequency: 'syncFrequency',
   emailNotifications: 'emailNotifications',
   whatsAppNotifications: 'whatsAppNotifications',
@@ -154,12 +155,12 @@ exports.Prisma.UserPreferencesScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.MailIdScalarFieldEnum = {
+exports.Prisma.MailIdLogScalarFieldEnum = {
   id: 'id',
   mailId: 'mailId',
   threadId: 'threadId',
   status: 'status',
-  userId: 'userId',
+  userRefId: 'userRefId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -182,14 +183,16 @@ exports.MailStatus = exports.$Enums.MailStatus = {
   pending: 'pending',
   processing: 'processing',
   completed: 'completed',
-  error: 'error'
+  error: 'error',
+  unable_to_analyze: 'unable_to_analyze',
+  non_job: 'non_job'
 };
 
 exports.Prisma.ModelName = {
   User: 'User',
   Application: 'Application',
   UserPreferences: 'UserPreferences',
-  MailId: 'MailId'
+  MailIdLog: 'MailIdLog'
 };
 
 /**

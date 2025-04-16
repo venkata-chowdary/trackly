@@ -29,10 +29,10 @@ export type Application = $Result.DefaultSelection<Prisma.$ApplicationPayload>
  */
 export type UserPreferences = $Result.DefaultSelection<Prisma.$UserPreferencesPayload>
 /**
- * Model MailId
+ * Model MailIdLog
  * 
  */
-export type MailId = $Result.DefaultSelection<Prisma.$MailIdPayload>
+export type MailIdLog = $Result.DefaultSelection<Prisma.$MailIdLogPayload>
 
 /**
  * Enums
@@ -42,7 +42,9 @@ export namespace $Enums {
   pending: 'pending',
   processing: 'processing',
   completed: 'completed',
-  error: 'error'
+  error: 'error',
+  unable_to_analyze: 'unable_to_analyze',
+  non_job: 'non_job'
 };
 
 export type MailStatus = (typeof MailStatus)[keyof typeof MailStatus]
@@ -209,14 +211,14 @@ export class PrismaClient<
   get userPreferences(): Prisma.UserPreferencesDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.mailId`: Exposes CRUD operations for the **MailId** model.
+   * `prisma.mailIdLog`: Exposes CRUD operations for the **MailIdLog** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more MailIds
-    * const mailIds = await prisma.mailId.findMany()
+    * // Fetch zero or more MailIdLogs
+    * const mailIdLogs = await prisma.mailIdLog.findMany()
     * ```
     */
-  get mailId(): Prisma.MailIdDelegate<ExtArgs, ClientOptions>;
+  get mailIdLog(): Prisma.MailIdLogDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -660,7 +662,7 @@ export namespace Prisma {
     User: 'User',
     Application: 'Application',
     UserPreferences: 'UserPreferences',
-    MailId: 'MailId'
+    MailIdLog: 'MailIdLog'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -679,7 +681,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "application" | "userPreferences" | "mailId"
+      modelProps: "user" | "application" | "userPreferences" | "mailIdLog"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -905,77 +907,77 @@ export namespace Prisma {
           }
         }
       }
-      MailId: {
-        payload: Prisma.$MailIdPayload<ExtArgs>
-        fields: Prisma.MailIdFieldRefs
+      MailIdLog: {
+        payload: Prisma.$MailIdLogPayload<ExtArgs>
+        fields: Prisma.MailIdLogFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.MailIdFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MailIdPayload> | null
+            args: Prisma.MailIdLogFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MailIdLogPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.MailIdFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MailIdPayload>
+            args: Prisma.MailIdLogFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MailIdLogPayload>
           }
           findFirst: {
-            args: Prisma.MailIdFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MailIdPayload> | null
+            args: Prisma.MailIdLogFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MailIdLogPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.MailIdFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MailIdPayload>
+            args: Prisma.MailIdLogFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MailIdLogPayload>
           }
           findMany: {
-            args: Prisma.MailIdFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MailIdPayload>[]
+            args: Prisma.MailIdLogFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MailIdLogPayload>[]
           }
           create: {
-            args: Prisma.MailIdCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MailIdPayload>
+            args: Prisma.MailIdLogCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MailIdLogPayload>
           }
           createMany: {
-            args: Prisma.MailIdCreateManyArgs<ExtArgs>
+            args: Prisma.MailIdLogCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.MailIdCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MailIdPayload>[]
+            args: Prisma.MailIdLogCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MailIdLogPayload>[]
           }
           delete: {
-            args: Prisma.MailIdDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MailIdPayload>
+            args: Prisma.MailIdLogDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MailIdLogPayload>
           }
           update: {
-            args: Prisma.MailIdUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MailIdPayload>
+            args: Prisma.MailIdLogUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MailIdLogPayload>
           }
           deleteMany: {
-            args: Prisma.MailIdDeleteManyArgs<ExtArgs>
+            args: Prisma.MailIdLogDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.MailIdUpdateManyArgs<ExtArgs>
+            args: Prisma.MailIdLogUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.MailIdUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MailIdPayload>[]
+            args: Prisma.MailIdLogUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MailIdLogPayload>[]
           }
           upsert: {
-            args: Prisma.MailIdUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MailIdPayload>
+            args: Prisma.MailIdLogUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MailIdLogPayload>
           }
           aggregate: {
-            args: Prisma.MailIdAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateMailId>
+            args: Prisma.MailIdLogAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMailIdLog>
           }
           groupBy: {
-            args: Prisma.MailIdGroupByArgs<ExtArgs>
-            result: $Utils.Optional<MailIdGroupByOutputType>[]
+            args: Prisma.MailIdLogGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MailIdLogGroupByOutputType>[]
           }
           count: {
-            args: Prisma.MailIdCountArgs<ExtArgs>
-            result: $Utils.Optional<MailIdCountAggregateOutputType> | number
+            args: Prisma.MailIdLogCountArgs<ExtArgs>
+            result: $Utils.Optional<MailIdLogCountAggregateOutputType> | number
           }
         }
       }
@@ -1066,7 +1068,7 @@ export namespace Prisma {
     user?: UserOmit
     application?: ApplicationOmit
     userPreferences?: UserPreferencesOmit
-    mailId?: MailIdOmit
+    mailIdLog?: MailIdLogOmit
   }
 
   /* Types for Logging */
@@ -1161,13 +1163,13 @@ export namespace Prisma {
    */
 
   export type UserCountOutputType = {
-    applications: number
-    MailId: number
+    applicationRefs: number
+    mailRefs: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    applications?: boolean | UserCountOutputTypeCountApplicationsArgs
-    MailId?: boolean | UserCountOutputTypeCountMailIdArgs
+    applicationRefs?: boolean | UserCountOutputTypeCountApplicationRefsArgs
+    mailRefs?: boolean | UserCountOutputTypeCountMailRefsArgs
   }
 
   // Custom InputTypes
@@ -1184,15 +1186,46 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountApplicationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserCountOutputTypeCountApplicationRefsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ApplicationWhereInput
   }
 
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountMailIdArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: MailIdWhereInput
+  export type UserCountOutputTypeCountMailRefsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MailIdLogWhereInput
+  }
+
+
+  /**
+   * Count Type MailIdLogCountOutputType
+   */
+
+  export type MailIdLogCountOutputType = {
+    applicationRefs: number
+  }
+
+  export type MailIdLogCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    applicationRefs?: boolean | MailIdLogCountOutputTypeCountApplicationRefsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * MailIdLogCountOutputType without action
+   */
+  export type MailIdLogCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MailIdLogCountOutputType
+     */
+    select?: MailIdLogCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * MailIdLogCountOutputType without action
+   */
+  export type MailIdLogCountOutputTypeCountApplicationRefsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ApplicationWhereInput
   }
 
 
@@ -1422,9 +1455,9 @@ export namespace Prisma {
     credits?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    applications?: boolean | User$applicationsArgs<ExtArgs>
+    applicationRefs?: boolean | User$applicationRefsArgs<ExtArgs>
     UserPreferences?: boolean | User$UserPreferencesArgs<ExtArgs>
-    MailId?: boolean | User$MailIdArgs<ExtArgs>
+    mailRefs?: boolean | User$mailRefsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1463,9 +1496,9 @@ export namespace Prisma {
 
   export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clerkUserId" | "email" | "name" | "imageUrl" | "credits" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    applications?: boolean | User$applicationsArgs<ExtArgs>
+    applicationRefs?: boolean | User$applicationRefsArgs<ExtArgs>
     UserPreferences?: boolean | User$UserPreferencesArgs<ExtArgs>
-    MailId?: boolean | User$MailIdArgs<ExtArgs>
+    mailRefs?: boolean | User$mailRefsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1474,9 +1507,9 @@ export namespace Prisma {
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {
-      applications: Prisma.$ApplicationPayload<ExtArgs>[]
+      applicationRefs: Prisma.$ApplicationPayload<ExtArgs>[]
       UserPreferences: Prisma.$UserPreferencesPayload<ExtArgs> | null
-      MailId: Prisma.$MailIdPayload<ExtArgs>[]
+      mailRefs: Prisma.$MailIdLogPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -1881,9 +1914,9 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    applications<T extends User$applicationsArgs<ExtArgs> = {}>(args?: Subset<T, User$applicationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ApplicationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    applicationRefs<T extends User$applicationRefsArgs<ExtArgs> = {}>(args?: Subset<T, User$applicationRefsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ApplicationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     UserPreferences<T extends User$UserPreferencesArgs<ExtArgs> = {}>(args?: Subset<T, User$UserPreferencesArgs<ExtArgs>>): Prisma__UserPreferencesClient<$Result.GetResult<Prisma.$UserPreferencesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    MailId<T extends User$MailIdArgs<ExtArgs> = {}>(args?: Subset<T, User$MailIdArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MailIdPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    mailRefs<T extends User$mailRefsArgs<ExtArgs> = {}>(args?: Subset<T, User$mailRefsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MailIdLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2309,9 +2342,9 @@ export namespace Prisma {
   }
 
   /**
-   * User.applications
+   * User.applicationRefs
    */
-  export type User$applicationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$applicationRefsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Application
      */
@@ -2352,27 +2385,27 @@ export namespace Prisma {
   }
 
   /**
-   * User.MailId
+   * User.mailRefs
    */
-  export type User$MailIdArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$mailRefsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the MailId
+     * Select specific fields to fetch from the MailIdLog
      */
-    select?: MailIdSelect<ExtArgs> | null
+    select?: MailIdLogSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the MailId
+     * Omit specific fields from the MailIdLog
      */
-    omit?: MailIdOmit<ExtArgs> | null
+    omit?: MailIdLogOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: MailIdInclude<ExtArgs> | null
-    where?: MailIdWhereInput
-    orderBy?: MailIdOrderByWithRelationInput | MailIdOrderByWithRelationInput[]
-    cursor?: MailIdWhereUniqueInput
+    include?: MailIdLogInclude<ExtArgs> | null
+    where?: MailIdLogWhereInput
+    orderBy?: MailIdLogOrderByWithRelationInput | MailIdLogOrderByWithRelationInput[]
+    cursor?: MailIdLogWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: MailIdScalarFieldEnum | MailIdScalarFieldEnum[]
+    distinct?: MailIdLogScalarFieldEnum | MailIdLogScalarFieldEnum[]
   }
 
   /**
@@ -2406,7 +2439,7 @@ export namespace Prisma {
 
   export type ApplicationMinAggregateOutputType = {
     id: string | null
-    userId: string | null
+    userRefId: string | null
     jobTitle: string | null
     company: string | null
     jobId: string | null
@@ -2417,11 +2450,12 @@ export namespace Prisma {
     appliedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
+    mailRefId: string | null
   }
 
   export type ApplicationMaxAggregateOutputType = {
     id: string | null
-    userId: string | null
+    userRefId: string | null
     jobTitle: string | null
     company: string | null
     jobId: string | null
@@ -2432,11 +2466,12 @@ export namespace Prisma {
     appliedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
+    mailRefId: string | null
   }
 
   export type ApplicationCountAggregateOutputType = {
     id: number
-    userId: number
+    userRefId: number
     jobTitle: number
     company: number
     jobId: number
@@ -2448,13 +2483,14 @@ export namespace Prisma {
     appliedAt: number
     createdAt: number
     updatedAt: number
+    mailRefId: number
     _all: number
   }
 
 
   export type ApplicationMinAggregateInputType = {
     id?: true
-    userId?: true
+    userRefId?: true
     jobTitle?: true
     company?: true
     jobId?: true
@@ -2465,11 +2501,12 @@ export namespace Prisma {
     appliedAt?: true
     createdAt?: true
     updatedAt?: true
+    mailRefId?: true
   }
 
   export type ApplicationMaxAggregateInputType = {
     id?: true
-    userId?: true
+    userRefId?: true
     jobTitle?: true
     company?: true
     jobId?: true
@@ -2480,11 +2517,12 @@ export namespace Prisma {
     appliedAt?: true
     createdAt?: true
     updatedAt?: true
+    mailRefId?: true
   }
 
   export type ApplicationCountAggregateInputType = {
     id?: true
-    userId?: true
+    userRefId?: true
     jobTitle?: true
     company?: true
     jobId?: true
@@ -2496,6 +2534,7 @@ export namespace Prisma {
     appliedAt?: true
     createdAt?: true
     updatedAt?: true
+    mailRefId?: true
     _all?: true
   }
 
@@ -2573,7 +2612,7 @@ export namespace Prisma {
 
   export type ApplicationGroupByOutputType = {
     id: string
-    userId: string
+    userRefId: string
     jobTitle: string
     company: string
     jobId: string | null
@@ -2585,6 +2624,7 @@ export namespace Prisma {
     appliedAt: Date
     createdAt: Date
     updatedAt: Date
+    mailRefId: string
     _count: ApplicationCountAggregateOutputType | null
     _min: ApplicationMinAggregateOutputType | null
     _max: ApplicationMaxAggregateOutputType | null
@@ -2606,7 +2646,7 @@ export namespace Prisma {
 
   export type ApplicationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    userId?: boolean
+    userRefId?: boolean
     jobTitle?: boolean
     company?: boolean
     jobId?: boolean
@@ -2618,12 +2658,14 @@ export namespace Prisma {
     appliedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    mailRefId?: boolean
+    userRef?: boolean | UserDefaultArgs<ExtArgs>
+    mailRef?: boolean | MailIdLogDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["application"]>
 
   export type ApplicationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    userId?: boolean
+    userRefId?: boolean
     jobTitle?: boolean
     company?: boolean
     jobId?: boolean
@@ -2635,12 +2677,14 @@ export namespace Prisma {
     appliedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    mailRefId?: boolean
+    userRef?: boolean | UserDefaultArgs<ExtArgs>
+    mailRef?: boolean | MailIdLogDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["application"]>
 
   export type ApplicationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    userId?: boolean
+    userRefId?: boolean
     jobTitle?: boolean
     company?: boolean
     jobId?: boolean
@@ -2652,12 +2696,14 @@ export namespace Prisma {
     appliedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    mailRefId?: boolean
+    userRef?: boolean | UserDefaultArgs<ExtArgs>
+    mailRef?: boolean | MailIdLogDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["application"]>
 
   export type ApplicationSelectScalar = {
     id?: boolean
-    userId?: boolean
+    userRefId?: boolean
     jobTitle?: boolean
     company?: boolean
     jobId?: boolean
@@ -2669,27 +2715,32 @@ export namespace Prisma {
     appliedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    mailRefId?: boolean
   }
 
-  export type ApplicationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "jobTitle" | "company" | "jobId" | "platform" | "location" | "status" | "notes" | "jobType" | "appliedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["application"]>
+  export type ApplicationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userRefId" | "jobTitle" | "company" | "jobId" | "platform" | "location" | "status" | "notes" | "jobType" | "appliedAt" | "createdAt" | "updatedAt" | "mailRefId", ExtArgs["result"]["application"]>
   export type ApplicationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    userRef?: boolean | UserDefaultArgs<ExtArgs>
+    mailRef?: boolean | MailIdLogDefaultArgs<ExtArgs>
   }
   export type ApplicationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    userRef?: boolean | UserDefaultArgs<ExtArgs>
+    mailRef?: boolean | MailIdLogDefaultArgs<ExtArgs>
   }
   export type ApplicationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    userRef?: boolean | UserDefaultArgs<ExtArgs>
+    mailRef?: boolean | MailIdLogDefaultArgs<ExtArgs>
   }
 
   export type $ApplicationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Application"
     objects: {
-      user: Prisma.$UserPayload<ExtArgs>
+      userRef: Prisma.$UserPayload<ExtArgs>
+      mailRef: Prisma.$MailIdLogPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      userId: string
+      userRefId: string
       jobTitle: string
       company: string
       jobId: string | null
@@ -2701,6 +2752,7 @@ export namespace Prisma {
       appliedAt: Date
       createdAt: Date
       updatedAt: Date
+      mailRefId: string
     }, ExtArgs["result"]["application"]>
     composites: {}
   }
@@ -3095,7 +3147,8 @@ export namespace Prisma {
    */
   export interface Prisma__ApplicationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    userRef<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    mailRef<T extends MailIdLogDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MailIdLogDefaultArgs<ExtArgs>>): Prisma__MailIdLogClient<$Result.GetResult<Prisma.$MailIdLogPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3126,7 +3179,7 @@ export namespace Prisma {
    */
   interface ApplicationFieldRefs {
     readonly id: FieldRef<"Application", 'String'>
-    readonly userId: FieldRef<"Application", 'String'>
+    readonly userRefId: FieldRef<"Application", 'String'>
     readonly jobTitle: FieldRef<"Application", 'String'>
     readonly company: FieldRef<"Application", 'String'>
     readonly jobId: FieldRef<"Application", 'String'>
@@ -3138,6 +3191,7 @@ export namespace Prisma {
     readonly appliedAt: FieldRef<"Application", 'DateTime'>
     readonly createdAt: FieldRef<"Application", 'DateTime'>
     readonly updatedAt: FieldRef<"Application", 'DateTime'>
+    readonly mailRefId: FieldRef<"Application", 'String'>
   }
     
 
@@ -3574,7 +3628,7 @@ export namespace Prisma {
 
   export type UserPreferencesMinAggregateOutputType = {
     id: string | null
-    userId: string | null
+    userRefId: string | null
     syncFrequency: number | null
     emailNotifications: boolean | null
     whatsAppNotifications: boolean | null
@@ -3584,7 +3638,7 @@ export namespace Prisma {
 
   export type UserPreferencesMaxAggregateOutputType = {
     id: string | null
-    userId: string | null
+    userRefId: string | null
     syncFrequency: number | null
     emailNotifications: boolean | null
     whatsAppNotifications: boolean | null
@@ -3594,7 +3648,7 @@ export namespace Prisma {
 
   export type UserPreferencesCountAggregateOutputType = {
     id: number
-    userId: number
+    userRefId: number
     syncFrequency: number
     emailNotifications: number
     whatsAppNotifications: number
@@ -3614,7 +3668,7 @@ export namespace Prisma {
 
   export type UserPreferencesMinAggregateInputType = {
     id?: true
-    userId?: true
+    userRefId?: true
     syncFrequency?: true
     emailNotifications?: true
     whatsAppNotifications?: true
@@ -3624,7 +3678,7 @@ export namespace Prisma {
 
   export type UserPreferencesMaxAggregateInputType = {
     id?: true
-    userId?: true
+    userRefId?: true
     syncFrequency?: true
     emailNotifications?: true
     whatsAppNotifications?: true
@@ -3634,7 +3688,7 @@ export namespace Prisma {
 
   export type UserPreferencesCountAggregateInputType = {
     id?: true
-    userId?: true
+    userRefId?: true
     syncFrequency?: true
     emailNotifications?: true
     whatsAppNotifications?: true
@@ -3731,7 +3785,7 @@ export namespace Prisma {
 
   export type UserPreferencesGroupByOutputType = {
     id: string
-    userId: string
+    userRefId: string
     syncFrequency: number
     emailNotifications: boolean
     whatsAppNotifications: boolean
@@ -3760,40 +3814,40 @@ export namespace Prisma {
 
   export type UserPreferencesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    userId?: boolean
+    userRefId?: boolean
     syncFrequency?: boolean
     emailNotifications?: boolean
     whatsAppNotifications?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    userRef?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["userPreferences"]>
 
   export type UserPreferencesSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    userId?: boolean
+    userRefId?: boolean
     syncFrequency?: boolean
     emailNotifications?: boolean
     whatsAppNotifications?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    userRef?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["userPreferences"]>
 
   export type UserPreferencesSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    userId?: boolean
+    userRefId?: boolean
     syncFrequency?: boolean
     emailNotifications?: boolean
     whatsAppNotifications?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    userRef?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["userPreferences"]>
 
   export type UserPreferencesSelectScalar = {
     id?: boolean
-    userId?: boolean
+    userRefId?: boolean
     syncFrequency?: boolean
     emailNotifications?: boolean
     whatsAppNotifications?: boolean
@@ -3801,25 +3855,25 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type UserPreferencesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "syncFrequency" | "emailNotifications" | "whatsAppNotifications" | "createdAt" | "updatedAt", ExtArgs["result"]["userPreferences"]>
+  export type UserPreferencesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userRefId" | "syncFrequency" | "emailNotifications" | "whatsAppNotifications" | "createdAt" | "updatedAt", ExtArgs["result"]["userPreferences"]>
   export type UserPreferencesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    userRef?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type UserPreferencesIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    userRef?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type UserPreferencesIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    userRef?: boolean | UserDefaultArgs<ExtArgs>
   }
 
   export type $UserPreferencesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "UserPreferences"
     objects: {
-      user: Prisma.$UserPayload<ExtArgs>
+      userRef: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      userId: string
+      userRefId: string
       syncFrequency: number
       emailNotifications: boolean
       whatsAppNotifications: boolean
@@ -4219,7 +4273,7 @@ export namespace Prisma {
    */
   export interface Prisma__UserPreferencesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    userRef<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4250,7 +4304,7 @@ export namespace Prisma {
    */
   interface UserPreferencesFieldRefs {
     readonly id: FieldRef<"UserPreferences", 'String'>
-    readonly userId: FieldRef<"UserPreferences", 'String'>
+    readonly userRefId: FieldRef<"UserPreferences", 'String'>
     readonly syncFrequency: FieldRef<"UserPreferences", 'Int'>
     readonly emailNotifications: FieldRef<"UserPreferences", 'Boolean'>
     readonly whatsAppNotifications: FieldRef<"UserPreferences", 'Boolean'>
@@ -4671,374 +4725,379 @@ export namespace Prisma {
 
 
   /**
-   * Model MailId
+   * Model MailIdLog
    */
 
-  export type AggregateMailId = {
-    _count: MailIdCountAggregateOutputType | null
-    _min: MailIdMinAggregateOutputType | null
-    _max: MailIdMaxAggregateOutputType | null
+  export type AggregateMailIdLog = {
+    _count: MailIdLogCountAggregateOutputType | null
+    _min: MailIdLogMinAggregateOutputType | null
+    _max: MailIdLogMaxAggregateOutputType | null
   }
 
-  export type MailIdMinAggregateOutputType = {
+  export type MailIdLogMinAggregateOutputType = {
     id: string | null
     mailId: string | null
     threadId: string | null
     status: $Enums.MailStatus | null
-    userId: string | null
+    userRefId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
 
-  export type MailIdMaxAggregateOutputType = {
+  export type MailIdLogMaxAggregateOutputType = {
     id: string | null
     mailId: string | null
     threadId: string | null
     status: $Enums.MailStatus | null
-    userId: string | null
+    userRefId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
 
-  export type MailIdCountAggregateOutputType = {
+  export type MailIdLogCountAggregateOutputType = {
     id: number
     mailId: number
     threadId: number
     status: number
-    userId: number
+    userRefId: number
     createdAt: number
     updatedAt: number
     _all: number
   }
 
 
-  export type MailIdMinAggregateInputType = {
+  export type MailIdLogMinAggregateInputType = {
     id?: true
     mailId?: true
     threadId?: true
     status?: true
-    userId?: true
+    userRefId?: true
     createdAt?: true
     updatedAt?: true
   }
 
-  export type MailIdMaxAggregateInputType = {
+  export type MailIdLogMaxAggregateInputType = {
     id?: true
     mailId?: true
     threadId?: true
     status?: true
-    userId?: true
+    userRefId?: true
     createdAt?: true
     updatedAt?: true
   }
 
-  export type MailIdCountAggregateInputType = {
+  export type MailIdLogCountAggregateInputType = {
     id?: true
     mailId?: true
     threadId?: true
     status?: true
-    userId?: true
+    userRefId?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
   }
 
-  export type MailIdAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MailIdLogAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which MailId to aggregate.
+     * Filter which MailIdLog to aggregate.
      */
-    where?: MailIdWhereInput
+    where?: MailIdLogWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of MailIds to fetch.
+     * Determine the order of MailIdLogs to fetch.
      */
-    orderBy?: MailIdOrderByWithRelationInput | MailIdOrderByWithRelationInput[]
+    orderBy?: MailIdLogOrderByWithRelationInput | MailIdLogOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: MailIdWhereUniqueInput
+    cursor?: MailIdLogWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` MailIds from the position of the cursor.
+     * Take `±n` MailIdLogs from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` MailIds.
+     * Skip the first `n` MailIdLogs.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned MailIds
+     * Count returned MailIdLogs
     **/
-    _count?: true | MailIdCountAggregateInputType
+    _count?: true | MailIdLogCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: MailIdMinAggregateInputType
+    _min?: MailIdLogMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: MailIdMaxAggregateInputType
+    _max?: MailIdLogMaxAggregateInputType
   }
 
-  export type GetMailIdAggregateType<T extends MailIdAggregateArgs> = {
-        [P in keyof T & keyof AggregateMailId]: P extends '_count' | 'count'
+  export type GetMailIdLogAggregateType<T extends MailIdLogAggregateArgs> = {
+        [P in keyof T & keyof AggregateMailIdLog]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateMailId[P]>
-      : GetScalarType<T[P], AggregateMailId[P]>
+        : GetScalarType<T[P], AggregateMailIdLog[P]>
+      : GetScalarType<T[P], AggregateMailIdLog[P]>
   }
 
 
 
 
-  export type MailIdGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: MailIdWhereInput
-    orderBy?: MailIdOrderByWithAggregationInput | MailIdOrderByWithAggregationInput[]
-    by: MailIdScalarFieldEnum[] | MailIdScalarFieldEnum
-    having?: MailIdScalarWhereWithAggregatesInput
+  export type MailIdLogGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MailIdLogWhereInput
+    orderBy?: MailIdLogOrderByWithAggregationInput | MailIdLogOrderByWithAggregationInput[]
+    by: MailIdLogScalarFieldEnum[] | MailIdLogScalarFieldEnum
+    having?: MailIdLogScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: MailIdCountAggregateInputType | true
-    _min?: MailIdMinAggregateInputType
-    _max?: MailIdMaxAggregateInputType
+    _count?: MailIdLogCountAggregateInputType | true
+    _min?: MailIdLogMinAggregateInputType
+    _max?: MailIdLogMaxAggregateInputType
   }
 
-  export type MailIdGroupByOutputType = {
+  export type MailIdLogGroupByOutputType = {
     id: string
     mailId: string
     threadId: string
     status: $Enums.MailStatus
-    userId: string
+    userRefId: string
     createdAt: Date
     updatedAt: Date
-    _count: MailIdCountAggregateOutputType | null
-    _min: MailIdMinAggregateOutputType | null
-    _max: MailIdMaxAggregateOutputType | null
+    _count: MailIdLogCountAggregateOutputType | null
+    _min: MailIdLogMinAggregateOutputType | null
+    _max: MailIdLogMaxAggregateOutputType | null
   }
 
-  type GetMailIdGroupByPayload<T extends MailIdGroupByArgs> = Prisma.PrismaPromise<
+  type GetMailIdLogGroupByPayload<T extends MailIdLogGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<MailIdGroupByOutputType, T['by']> &
+      PickEnumerable<MailIdLogGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof MailIdGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof MailIdLogGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], MailIdGroupByOutputType[P]>
-            : GetScalarType<T[P], MailIdGroupByOutputType[P]>
+              : GetScalarType<T[P], MailIdLogGroupByOutputType[P]>
+            : GetScalarType<T[P], MailIdLogGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type MailIdSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type MailIdLogSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     mailId?: boolean
     threadId?: boolean
     status?: boolean
-    userId?: boolean
+    userRefId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["mailId"]>
+    userRef?: boolean | UserDefaultArgs<ExtArgs>
+    applicationRefs?: boolean | MailIdLog$applicationRefsArgs<ExtArgs>
+    _count?: boolean | MailIdLogCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["mailIdLog"]>
 
-  export type MailIdSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type MailIdLogSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     mailId?: boolean
     threadId?: boolean
     status?: boolean
-    userId?: boolean
+    userRefId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["mailId"]>
+    userRef?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["mailIdLog"]>
 
-  export type MailIdSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type MailIdLogSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     mailId?: boolean
     threadId?: boolean
     status?: boolean
-    userId?: boolean
+    userRefId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["mailId"]>
+    userRef?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["mailIdLog"]>
 
-  export type MailIdSelectScalar = {
+  export type MailIdLogSelectScalar = {
     id?: boolean
     mailId?: boolean
     threadId?: boolean
     status?: boolean
-    userId?: boolean
+    userRefId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type MailIdOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "mailId" | "threadId" | "status" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["mailId"]>
-  export type MailIdInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
+  export type MailIdLogOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "mailId" | "threadId" | "status" | "userRefId" | "createdAt" | "updatedAt", ExtArgs["result"]["mailIdLog"]>
+  export type MailIdLogInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    userRef?: boolean | UserDefaultArgs<ExtArgs>
+    applicationRefs?: boolean | MailIdLog$applicationRefsArgs<ExtArgs>
+    _count?: boolean | MailIdLogCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type MailIdIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
+  export type MailIdLogIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    userRef?: boolean | UserDefaultArgs<ExtArgs>
   }
-  export type MailIdIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
+  export type MailIdLogIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    userRef?: boolean | UserDefaultArgs<ExtArgs>
   }
 
-  export type $MailIdPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "MailId"
+  export type $MailIdLogPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "MailIdLog"
     objects: {
-      user: Prisma.$UserPayload<ExtArgs>
+      userRef: Prisma.$UserPayload<ExtArgs>
+      applicationRefs: Prisma.$ApplicationPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       mailId: string
       threadId: string
       status: $Enums.MailStatus
-      userId: string
+      userRefId: string
       createdAt: Date
       updatedAt: Date
-    }, ExtArgs["result"]["mailId"]>
+    }, ExtArgs["result"]["mailIdLog"]>
     composites: {}
   }
 
-  type MailIdGetPayload<S extends boolean | null | undefined | MailIdDefaultArgs> = $Result.GetResult<Prisma.$MailIdPayload, S>
+  type MailIdLogGetPayload<S extends boolean | null | undefined | MailIdLogDefaultArgs> = $Result.GetResult<Prisma.$MailIdLogPayload, S>
 
-  type MailIdCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<MailIdFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: MailIdCountAggregateInputType | true
+  type MailIdLogCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MailIdLogFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MailIdLogCountAggregateInputType | true
     }
 
-  export interface MailIdDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MailId'], meta: { name: 'MailId' } }
+  export interface MailIdLogDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MailIdLog'], meta: { name: 'MailIdLog' } }
     /**
-     * Find zero or one MailId that matches the filter.
-     * @param {MailIdFindUniqueArgs} args - Arguments to find a MailId
+     * Find zero or one MailIdLog that matches the filter.
+     * @param {MailIdLogFindUniqueArgs} args - Arguments to find a MailIdLog
      * @example
-     * // Get one MailId
-     * const mailId = await prisma.mailId.findUnique({
+     * // Get one MailIdLog
+     * const mailIdLog = await prisma.mailIdLog.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends MailIdFindUniqueArgs>(args: SelectSubset<T, MailIdFindUniqueArgs<ExtArgs>>): Prisma__MailIdClient<$Result.GetResult<Prisma.$MailIdPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends MailIdLogFindUniqueArgs>(args: SelectSubset<T, MailIdLogFindUniqueArgs<ExtArgs>>): Prisma__MailIdLogClient<$Result.GetResult<Prisma.$MailIdLogPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one MailId that matches the filter or throw an error with `error.code='P2025'`
+     * Find one MailIdLog that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {MailIdFindUniqueOrThrowArgs} args - Arguments to find a MailId
+     * @param {MailIdLogFindUniqueOrThrowArgs} args - Arguments to find a MailIdLog
      * @example
-     * // Get one MailId
-     * const mailId = await prisma.mailId.findUniqueOrThrow({
+     * // Get one MailIdLog
+     * const mailIdLog = await prisma.mailIdLog.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends MailIdFindUniqueOrThrowArgs>(args: SelectSubset<T, MailIdFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MailIdClient<$Result.GetResult<Prisma.$MailIdPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends MailIdLogFindUniqueOrThrowArgs>(args: SelectSubset<T, MailIdLogFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MailIdLogClient<$Result.GetResult<Prisma.$MailIdLogPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first MailId that matches the filter.
+     * Find the first MailIdLog that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {MailIdFindFirstArgs} args - Arguments to find a MailId
+     * @param {MailIdLogFindFirstArgs} args - Arguments to find a MailIdLog
      * @example
-     * // Get one MailId
-     * const mailId = await prisma.mailId.findFirst({
+     * // Get one MailIdLog
+     * const mailIdLog = await prisma.mailIdLog.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends MailIdFindFirstArgs>(args?: SelectSubset<T, MailIdFindFirstArgs<ExtArgs>>): Prisma__MailIdClient<$Result.GetResult<Prisma.$MailIdPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends MailIdLogFindFirstArgs>(args?: SelectSubset<T, MailIdLogFindFirstArgs<ExtArgs>>): Prisma__MailIdLogClient<$Result.GetResult<Prisma.$MailIdLogPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first MailId that matches the filter or
+     * Find the first MailIdLog that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {MailIdFindFirstOrThrowArgs} args - Arguments to find a MailId
+     * @param {MailIdLogFindFirstOrThrowArgs} args - Arguments to find a MailIdLog
      * @example
-     * // Get one MailId
-     * const mailId = await prisma.mailId.findFirstOrThrow({
+     * // Get one MailIdLog
+     * const mailIdLog = await prisma.mailIdLog.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends MailIdFindFirstOrThrowArgs>(args?: SelectSubset<T, MailIdFindFirstOrThrowArgs<ExtArgs>>): Prisma__MailIdClient<$Result.GetResult<Prisma.$MailIdPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends MailIdLogFindFirstOrThrowArgs>(args?: SelectSubset<T, MailIdLogFindFirstOrThrowArgs<ExtArgs>>): Prisma__MailIdLogClient<$Result.GetResult<Prisma.$MailIdLogPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more MailIds that matches the filter.
+     * Find zero or more MailIdLogs that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {MailIdFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {MailIdLogFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all MailIds
-     * const mailIds = await prisma.mailId.findMany()
+     * // Get all MailIdLogs
+     * const mailIdLogs = await prisma.mailIdLog.findMany()
      * 
-     * // Get first 10 MailIds
-     * const mailIds = await prisma.mailId.findMany({ take: 10 })
+     * // Get first 10 MailIdLogs
+     * const mailIdLogs = await prisma.mailIdLog.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const mailIdWithIdOnly = await prisma.mailId.findMany({ select: { id: true } })
+     * const mailIdLogWithIdOnly = await prisma.mailIdLog.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends MailIdFindManyArgs>(args?: SelectSubset<T, MailIdFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MailIdPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends MailIdLogFindManyArgs>(args?: SelectSubset<T, MailIdLogFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MailIdLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a MailId.
-     * @param {MailIdCreateArgs} args - Arguments to create a MailId.
+     * Create a MailIdLog.
+     * @param {MailIdLogCreateArgs} args - Arguments to create a MailIdLog.
      * @example
-     * // Create one MailId
-     * const MailId = await prisma.mailId.create({
+     * // Create one MailIdLog
+     * const MailIdLog = await prisma.mailIdLog.create({
      *   data: {
-     *     // ... data to create a MailId
+     *     // ... data to create a MailIdLog
      *   }
      * })
      * 
      */
-    create<T extends MailIdCreateArgs>(args: SelectSubset<T, MailIdCreateArgs<ExtArgs>>): Prisma__MailIdClient<$Result.GetResult<Prisma.$MailIdPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends MailIdLogCreateArgs>(args: SelectSubset<T, MailIdLogCreateArgs<ExtArgs>>): Prisma__MailIdLogClient<$Result.GetResult<Prisma.$MailIdLogPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many MailIds.
-     * @param {MailIdCreateManyArgs} args - Arguments to create many MailIds.
+     * Create many MailIdLogs.
+     * @param {MailIdLogCreateManyArgs} args - Arguments to create many MailIdLogs.
      * @example
-     * // Create many MailIds
-     * const mailId = await prisma.mailId.createMany({
+     * // Create many MailIdLogs
+     * const mailIdLog = await prisma.mailIdLog.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends MailIdCreateManyArgs>(args?: SelectSubset<T, MailIdCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends MailIdLogCreateManyArgs>(args?: SelectSubset<T, MailIdLogCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many MailIds and returns the data saved in the database.
-     * @param {MailIdCreateManyAndReturnArgs} args - Arguments to create many MailIds.
+     * Create many MailIdLogs and returns the data saved in the database.
+     * @param {MailIdLogCreateManyAndReturnArgs} args - Arguments to create many MailIdLogs.
      * @example
-     * // Create many MailIds
-     * const mailId = await prisma.mailId.createManyAndReturn({
+     * // Create many MailIdLogs
+     * const mailIdLog = await prisma.mailIdLog.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many MailIds and only return the `id`
-     * const mailIdWithIdOnly = await prisma.mailId.createManyAndReturn({
+     * // Create many MailIdLogs and only return the `id`
+     * const mailIdLogWithIdOnly = await prisma.mailIdLog.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -5048,28 +5107,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends MailIdCreateManyAndReturnArgs>(args?: SelectSubset<T, MailIdCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MailIdPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends MailIdLogCreateManyAndReturnArgs>(args?: SelectSubset<T, MailIdLogCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MailIdLogPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a MailId.
-     * @param {MailIdDeleteArgs} args - Arguments to delete one MailId.
+     * Delete a MailIdLog.
+     * @param {MailIdLogDeleteArgs} args - Arguments to delete one MailIdLog.
      * @example
-     * // Delete one MailId
-     * const MailId = await prisma.mailId.delete({
+     * // Delete one MailIdLog
+     * const MailIdLog = await prisma.mailIdLog.delete({
      *   where: {
-     *     // ... filter to delete one MailId
+     *     // ... filter to delete one MailIdLog
      *   }
      * })
      * 
      */
-    delete<T extends MailIdDeleteArgs>(args: SelectSubset<T, MailIdDeleteArgs<ExtArgs>>): Prisma__MailIdClient<$Result.GetResult<Prisma.$MailIdPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends MailIdLogDeleteArgs>(args: SelectSubset<T, MailIdLogDeleteArgs<ExtArgs>>): Prisma__MailIdLogClient<$Result.GetResult<Prisma.$MailIdLogPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one MailId.
-     * @param {MailIdUpdateArgs} args - Arguments to update one MailId.
+     * Update one MailIdLog.
+     * @param {MailIdLogUpdateArgs} args - Arguments to update one MailIdLog.
      * @example
-     * // Update one MailId
-     * const mailId = await prisma.mailId.update({
+     * // Update one MailIdLog
+     * const mailIdLog = await prisma.mailIdLog.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -5079,30 +5138,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends MailIdUpdateArgs>(args: SelectSubset<T, MailIdUpdateArgs<ExtArgs>>): Prisma__MailIdClient<$Result.GetResult<Prisma.$MailIdPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends MailIdLogUpdateArgs>(args: SelectSubset<T, MailIdLogUpdateArgs<ExtArgs>>): Prisma__MailIdLogClient<$Result.GetResult<Prisma.$MailIdLogPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more MailIds.
-     * @param {MailIdDeleteManyArgs} args - Arguments to filter MailIds to delete.
+     * Delete zero or more MailIdLogs.
+     * @param {MailIdLogDeleteManyArgs} args - Arguments to filter MailIdLogs to delete.
      * @example
-     * // Delete a few MailIds
-     * const { count } = await prisma.mailId.deleteMany({
+     * // Delete a few MailIdLogs
+     * const { count } = await prisma.mailIdLog.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends MailIdDeleteManyArgs>(args?: SelectSubset<T, MailIdDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends MailIdLogDeleteManyArgs>(args?: SelectSubset<T, MailIdLogDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more MailIds.
+     * Update zero or more MailIdLogs.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {MailIdUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {MailIdLogUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many MailIds
-     * const mailId = await prisma.mailId.updateMany({
+     * // Update many MailIdLogs
+     * const mailIdLog = await prisma.mailIdLog.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -5112,14 +5171,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends MailIdUpdateManyArgs>(args: SelectSubset<T, MailIdUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends MailIdLogUpdateManyArgs>(args: SelectSubset<T, MailIdLogUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more MailIds and returns the data updated in the database.
-     * @param {MailIdUpdateManyAndReturnArgs} args - Arguments to update many MailIds.
+     * Update zero or more MailIdLogs and returns the data updated in the database.
+     * @param {MailIdLogUpdateManyAndReturnArgs} args - Arguments to update many MailIdLogs.
      * @example
-     * // Update many MailIds
-     * const mailId = await prisma.mailId.updateManyAndReturn({
+     * // Update many MailIdLogs
+     * const mailIdLog = await prisma.mailIdLog.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -5128,8 +5187,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more MailIds and only return the `id`
-     * const mailIdWithIdOnly = await prisma.mailId.updateManyAndReturn({
+     * // Update zero or more MailIdLogs and only return the `id`
+     * const mailIdLogWithIdOnly = await prisma.mailIdLog.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -5142,56 +5201,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends MailIdUpdateManyAndReturnArgs>(args: SelectSubset<T, MailIdUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MailIdPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends MailIdLogUpdateManyAndReturnArgs>(args: SelectSubset<T, MailIdLogUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MailIdLogPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one MailId.
-     * @param {MailIdUpsertArgs} args - Arguments to update or create a MailId.
+     * Create or update one MailIdLog.
+     * @param {MailIdLogUpsertArgs} args - Arguments to update or create a MailIdLog.
      * @example
-     * // Update or create a MailId
-     * const mailId = await prisma.mailId.upsert({
+     * // Update or create a MailIdLog
+     * const mailIdLog = await prisma.mailIdLog.upsert({
      *   create: {
-     *     // ... data to create a MailId
+     *     // ... data to create a MailIdLog
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the MailId we want to update
+     *     // ... the filter for the MailIdLog we want to update
      *   }
      * })
      */
-    upsert<T extends MailIdUpsertArgs>(args: SelectSubset<T, MailIdUpsertArgs<ExtArgs>>): Prisma__MailIdClient<$Result.GetResult<Prisma.$MailIdPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends MailIdLogUpsertArgs>(args: SelectSubset<T, MailIdLogUpsertArgs<ExtArgs>>): Prisma__MailIdLogClient<$Result.GetResult<Prisma.$MailIdLogPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of MailIds.
+     * Count the number of MailIdLogs.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {MailIdCountArgs} args - Arguments to filter MailIds to count.
+     * @param {MailIdLogCountArgs} args - Arguments to filter MailIdLogs to count.
      * @example
-     * // Count the number of MailIds
-     * const count = await prisma.mailId.count({
+     * // Count the number of MailIdLogs
+     * const count = await prisma.mailIdLog.count({
      *   where: {
-     *     // ... the filter for the MailIds we want to count
+     *     // ... the filter for the MailIdLogs we want to count
      *   }
      * })
     **/
-    count<T extends MailIdCountArgs>(
-      args?: Subset<T, MailIdCountArgs>,
+    count<T extends MailIdLogCountArgs>(
+      args?: Subset<T, MailIdLogCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], MailIdCountAggregateOutputType>
+          : GetScalarType<T['select'], MailIdLogCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a MailId.
+     * Allows you to perform aggregations operations on a MailIdLog.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {MailIdAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {MailIdLogAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -5211,13 +5270,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends MailIdAggregateArgs>(args: Subset<T, MailIdAggregateArgs>): Prisma.PrismaPromise<GetMailIdAggregateType<T>>
+    aggregate<T extends MailIdLogAggregateArgs>(args: Subset<T, MailIdLogAggregateArgs>): Prisma.PrismaPromise<GetMailIdLogAggregateType<T>>
 
     /**
-     * Group by MailId.
+     * Group by MailIdLog.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {MailIdGroupByArgs} args - Group by arguments.
+     * @param {MailIdLogGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -5232,14 +5291,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends MailIdGroupByArgs,
+      T extends MailIdLogGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: MailIdGroupByArgs['orderBy'] }
-        : { orderBy?: MailIdGroupByArgs['orderBy'] },
+        ? { orderBy: MailIdLogGroupByArgs['orderBy'] }
+        : { orderBy?: MailIdLogGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -5288,22 +5347,23 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, MailIdGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMailIdGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, MailIdLogGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMailIdLogGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the MailId model
+   * Fields of the MailIdLog model
    */
-  readonly fields: MailIdFieldRefs;
+  readonly fields: MailIdLogFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for MailId.
+   * The delegate class that acts as a "Promise-like" for MailIdLog.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__MailIdClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__MailIdLogClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    userRef<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    applicationRefs<T extends MailIdLog$applicationRefsArgs<ExtArgs> = {}>(args?: Subset<T, MailIdLog$applicationRefsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ApplicationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5330,427 +5390,451 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the MailId model
+   * Fields of the MailIdLog model
    */
-  interface MailIdFieldRefs {
-    readonly id: FieldRef<"MailId", 'String'>
-    readonly mailId: FieldRef<"MailId", 'String'>
-    readonly threadId: FieldRef<"MailId", 'String'>
-    readonly status: FieldRef<"MailId", 'MailStatus'>
-    readonly userId: FieldRef<"MailId", 'String'>
-    readonly createdAt: FieldRef<"MailId", 'DateTime'>
-    readonly updatedAt: FieldRef<"MailId", 'DateTime'>
+  interface MailIdLogFieldRefs {
+    readonly id: FieldRef<"MailIdLog", 'String'>
+    readonly mailId: FieldRef<"MailIdLog", 'String'>
+    readonly threadId: FieldRef<"MailIdLog", 'String'>
+    readonly status: FieldRef<"MailIdLog", 'MailStatus'>
+    readonly userRefId: FieldRef<"MailIdLog", 'String'>
+    readonly createdAt: FieldRef<"MailIdLog", 'DateTime'>
+    readonly updatedAt: FieldRef<"MailIdLog", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * MailId findUnique
+   * MailIdLog findUnique
    */
-  export type MailIdFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MailIdLogFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the MailId
+     * Select specific fields to fetch from the MailIdLog
      */
-    select?: MailIdSelect<ExtArgs> | null
+    select?: MailIdLogSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the MailId
+     * Omit specific fields from the MailIdLog
      */
-    omit?: MailIdOmit<ExtArgs> | null
+    omit?: MailIdLogOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: MailIdInclude<ExtArgs> | null
+    include?: MailIdLogInclude<ExtArgs> | null
     /**
-     * Filter, which MailId to fetch.
+     * Filter, which MailIdLog to fetch.
      */
-    where: MailIdWhereUniqueInput
+    where: MailIdLogWhereUniqueInput
   }
 
   /**
-   * MailId findUniqueOrThrow
+   * MailIdLog findUniqueOrThrow
    */
-  export type MailIdFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MailIdLogFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the MailId
+     * Select specific fields to fetch from the MailIdLog
      */
-    select?: MailIdSelect<ExtArgs> | null
+    select?: MailIdLogSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the MailId
+     * Omit specific fields from the MailIdLog
      */
-    omit?: MailIdOmit<ExtArgs> | null
+    omit?: MailIdLogOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: MailIdInclude<ExtArgs> | null
+    include?: MailIdLogInclude<ExtArgs> | null
     /**
-     * Filter, which MailId to fetch.
+     * Filter, which MailIdLog to fetch.
      */
-    where: MailIdWhereUniqueInput
+    where: MailIdLogWhereUniqueInput
   }
 
   /**
-   * MailId findFirst
+   * MailIdLog findFirst
    */
-  export type MailIdFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MailIdLogFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the MailId
+     * Select specific fields to fetch from the MailIdLog
      */
-    select?: MailIdSelect<ExtArgs> | null
+    select?: MailIdLogSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the MailId
+     * Omit specific fields from the MailIdLog
      */
-    omit?: MailIdOmit<ExtArgs> | null
+    omit?: MailIdLogOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: MailIdInclude<ExtArgs> | null
+    include?: MailIdLogInclude<ExtArgs> | null
     /**
-     * Filter, which MailId to fetch.
+     * Filter, which MailIdLog to fetch.
      */
-    where?: MailIdWhereInput
+    where?: MailIdLogWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of MailIds to fetch.
+     * Determine the order of MailIdLogs to fetch.
      */
-    orderBy?: MailIdOrderByWithRelationInput | MailIdOrderByWithRelationInput[]
+    orderBy?: MailIdLogOrderByWithRelationInput | MailIdLogOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for MailIds.
+     * Sets the position for searching for MailIdLogs.
      */
-    cursor?: MailIdWhereUniqueInput
+    cursor?: MailIdLogWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` MailIds from the position of the cursor.
+     * Take `±n` MailIdLogs from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` MailIds.
+     * Skip the first `n` MailIdLogs.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of MailIds.
+     * Filter by unique combinations of MailIdLogs.
      */
-    distinct?: MailIdScalarFieldEnum | MailIdScalarFieldEnum[]
+    distinct?: MailIdLogScalarFieldEnum | MailIdLogScalarFieldEnum[]
   }
 
   /**
-   * MailId findFirstOrThrow
+   * MailIdLog findFirstOrThrow
    */
-  export type MailIdFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MailIdLogFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the MailId
+     * Select specific fields to fetch from the MailIdLog
      */
-    select?: MailIdSelect<ExtArgs> | null
+    select?: MailIdLogSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the MailId
+     * Omit specific fields from the MailIdLog
      */
-    omit?: MailIdOmit<ExtArgs> | null
+    omit?: MailIdLogOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: MailIdInclude<ExtArgs> | null
+    include?: MailIdLogInclude<ExtArgs> | null
     /**
-     * Filter, which MailId to fetch.
+     * Filter, which MailIdLog to fetch.
      */
-    where?: MailIdWhereInput
+    where?: MailIdLogWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of MailIds to fetch.
+     * Determine the order of MailIdLogs to fetch.
      */
-    orderBy?: MailIdOrderByWithRelationInput | MailIdOrderByWithRelationInput[]
+    orderBy?: MailIdLogOrderByWithRelationInput | MailIdLogOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for MailIds.
+     * Sets the position for searching for MailIdLogs.
      */
-    cursor?: MailIdWhereUniqueInput
+    cursor?: MailIdLogWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` MailIds from the position of the cursor.
+     * Take `±n` MailIdLogs from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` MailIds.
+     * Skip the first `n` MailIdLogs.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of MailIds.
+     * Filter by unique combinations of MailIdLogs.
      */
-    distinct?: MailIdScalarFieldEnum | MailIdScalarFieldEnum[]
+    distinct?: MailIdLogScalarFieldEnum | MailIdLogScalarFieldEnum[]
   }
 
   /**
-   * MailId findMany
+   * MailIdLog findMany
    */
-  export type MailIdFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MailIdLogFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the MailId
+     * Select specific fields to fetch from the MailIdLog
      */
-    select?: MailIdSelect<ExtArgs> | null
+    select?: MailIdLogSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the MailId
+     * Omit specific fields from the MailIdLog
      */
-    omit?: MailIdOmit<ExtArgs> | null
+    omit?: MailIdLogOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: MailIdInclude<ExtArgs> | null
+    include?: MailIdLogInclude<ExtArgs> | null
     /**
-     * Filter, which MailIds to fetch.
+     * Filter, which MailIdLogs to fetch.
      */
-    where?: MailIdWhereInput
+    where?: MailIdLogWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of MailIds to fetch.
+     * Determine the order of MailIdLogs to fetch.
      */
-    orderBy?: MailIdOrderByWithRelationInput | MailIdOrderByWithRelationInput[]
+    orderBy?: MailIdLogOrderByWithRelationInput | MailIdLogOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing MailIds.
+     * Sets the position for listing MailIdLogs.
      */
-    cursor?: MailIdWhereUniqueInput
+    cursor?: MailIdLogWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` MailIds from the position of the cursor.
+     * Take `±n` MailIdLogs from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` MailIds.
+     * Skip the first `n` MailIdLogs.
      */
     skip?: number
-    distinct?: MailIdScalarFieldEnum | MailIdScalarFieldEnum[]
+    distinct?: MailIdLogScalarFieldEnum | MailIdLogScalarFieldEnum[]
   }
 
   /**
-   * MailId create
+   * MailIdLog create
    */
-  export type MailIdCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MailIdLogCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the MailId
+     * Select specific fields to fetch from the MailIdLog
      */
-    select?: MailIdSelect<ExtArgs> | null
+    select?: MailIdLogSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the MailId
+     * Omit specific fields from the MailIdLog
      */
-    omit?: MailIdOmit<ExtArgs> | null
+    omit?: MailIdLogOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: MailIdInclude<ExtArgs> | null
+    include?: MailIdLogInclude<ExtArgs> | null
     /**
-     * The data needed to create a MailId.
+     * The data needed to create a MailIdLog.
      */
-    data: XOR<MailIdCreateInput, MailIdUncheckedCreateInput>
+    data: XOR<MailIdLogCreateInput, MailIdLogUncheckedCreateInput>
   }
 
   /**
-   * MailId createMany
+   * MailIdLog createMany
    */
-  export type MailIdCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MailIdLogCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many MailIds.
+     * The data used to create many MailIdLogs.
      */
-    data: MailIdCreateManyInput | MailIdCreateManyInput[]
+    data: MailIdLogCreateManyInput | MailIdLogCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * MailId createManyAndReturn
+   * MailIdLog createManyAndReturn
    */
-  export type MailIdCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MailIdLogCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the MailId
+     * Select specific fields to fetch from the MailIdLog
      */
-    select?: MailIdSelectCreateManyAndReturn<ExtArgs> | null
+    select?: MailIdLogSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the MailId
+     * Omit specific fields from the MailIdLog
      */
-    omit?: MailIdOmit<ExtArgs> | null
+    omit?: MailIdLogOmit<ExtArgs> | null
     /**
-     * The data used to create many MailIds.
+     * The data used to create many MailIdLogs.
      */
-    data: MailIdCreateManyInput | MailIdCreateManyInput[]
+    data: MailIdLogCreateManyInput | MailIdLogCreateManyInput[]
     skipDuplicates?: boolean
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: MailIdIncludeCreateManyAndReturn<ExtArgs> | null
+    include?: MailIdLogIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * MailId update
+   * MailIdLog update
    */
-  export type MailIdUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MailIdLogUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the MailId
+     * Select specific fields to fetch from the MailIdLog
      */
-    select?: MailIdSelect<ExtArgs> | null
+    select?: MailIdLogSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the MailId
+     * Omit specific fields from the MailIdLog
      */
-    omit?: MailIdOmit<ExtArgs> | null
+    omit?: MailIdLogOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: MailIdInclude<ExtArgs> | null
+    include?: MailIdLogInclude<ExtArgs> | null
     /**
-     * The data needed to update a MailId.
+     * The data needed to update a MailIdLog.
      */
-    data: XOR<MailIdUpdateInput, MailIdUncheckedUpdateInput>
+    data: XOR<MailIdLogUpdateInput, MailIdLogUncheckedUpdateInput>
     /**
-     * Choose, which MailId to update.
+     * Choose, which MailIdLog to update.
      */
-    where: MailIdWhereUniqueInput
+    where: MailIdLogWhereUniqueInput
   }
 
   /**
-   * MailId updateMany
+   * MailIdLog updateMany
    */
-  export type MailIdUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MailIdLogUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update MailIds.
+     * The data used to update MailIdLogs.
      */
-    data: XOR<MailIdUpdateManyMutationInput, MailIdUncheckedUpdateManyInput>
+    data: XOR<MailIdLogUpdateManyMutationInput, MailIdLogUncheckedUpdateManyInput>
     /**
-     * Filter which MailIds to update
+     * Filter which MailIdLogs to update
      */
-    where?: MailIdWhereInput
+    where?: MailIdLogWhereInput
     /**
-     * Limit how many MailIds to update.
+     * Limit how many MailIdLogs to update.
      */
     limit?: number
   }
 
   /**
-   * MailId updateManyAndReturn
+   * MailIdLog updateManyAndReturn
    */
-  export type MailIdUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MailIdLogUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the MailId
+     * Select specific fields to fetch from the MailIdLog
      */
-    select?: MailIdSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: MailIdLogSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the MailId
+     * Omit specific fields from the MailIdLog
      */
-    omit?: MailIdOmit<ExtArgs> | null
+    omit?: MailIdLogOmit<ExtArgs> | null
     /**
-     * The data used to update MailIds.
+     * The data used to update MailIdLogs.
      */
-    data: XOR<MailIdUpdateManyMutationInput, MailIdUncheckedUpdateManyInput>
+    data: XOR<MailIdLogUpdateManyMutationInput, MailIdLogUncheckedUpdateManyInput>
     /**
-     * Filter which MailIds to update
+     * Filter which MailIdLogs to update
      */
-    where?: MailIdWhereInput
+    where?: MailIdLogWhereInput
     /**
-     * Limit how many MailIds to update.
+     * Limit how many MailIdLogs to update.
      */
     limit?: number
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: MailIdIncludeUpdateManyAndReturn<ExtArgs> | null
+    include?: MailIdLogIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * MailId upsert
+   * MailIdLog upsert
    */
-  export type MailIdUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MailIdLogUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the MailId
+     * Select specific fields to fetch from the MailIdLog
      */
-    select?: MailIdSelect<ExtArgs> | null
+    select?: MailIdLogSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the MailId
+     * Omit specific fields from the MailIdLog
      */
-    omit?: MailIdOmit<ExtArgs> | null
+    omit?: MailIdLogOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: MailIdInclude<ExtArgs> | null
+    include?: MailIdLogInclude<ExtArgs> | null
     /**
-     * The filter to search for the MailId to update in case it exists.
+     * The filter to search for the MailIdLog to update in case it exists.
      */
-    where: MailIdWhereUniqueInput
+    where: MailIdLogWhereUniqueInput
     /**
-     * In case the MailId found by the `where` argument doesn't exist, create a new MailId with this data.
+     * In case the MailIdLog found by the `where` argument doesn't exist, create a new MailIdLog with this data.
      */
-    create: XOR<MailIdCreateInput, MailIdUncheckedCreateInput>
+    create: XOR<MailIdLogCreateInput, MailIdLogUncheckedCreateInput>
     /**
-     * In case the MailId was found with the provided `where` argument, update it with this data.
+     * In case the MailIdLog was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<MailIdUpdateInput, MailIdUncheckedUpdateInput>
+    update: XOR<MailIdLogUpdateInput, MailIdLogUncheckedUpdateInput>
   }
 
   /**
-   * MailId delete
+   * MailIdLog delete
    */
-  export type MailIdDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MailIdLogDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the MailId
+     * Select specific fields to fetch from the MailIdLog
      */
-    select?: MailIdSelect<ExtArgs> | null
+    select?: MailIdLogSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the MailId
+     * Omit specific fields from the MailIdLog
      */
-    omit?: MailIdOmit<ExtArgs> | null
+    omit?: MailIdLogOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: MailIdInclude<ExtArgs> | null
+    include?: MailIdLogInclude<ExtArgs> | null
     /**
-     * Filter which MailId to delete.
+     * Filter which MailIdLog to delete.
      */
-    where: MailIdWhereUniqueInput
+    where: MailIdLogWhereUniqueInput
   }
 
   /**
-   * MailId deleteMany
+   * MailIdLog deleteMany
    */
-  export type MailIdDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MailIdLogDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which MailIds to delete
+     * Filter which MailIdLogs to delete
      */
-    where?: MailIdWhereInput
+    where?: MailIdLogWhereInput
     /**
-     * Limit how many MailIds to delete.
+     * Limit how many MailIdLogs to delete.
      */
     limit?: number
   }
 
   /**
-   * MailId without action
+   * MailIdLog.applicationRefs
    */
-  export type MailIdDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MailIdLog$applicationRefsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the MailId
+     * Select specific fields to fetch from the Application
      */
-    select?: MailIdSelect<ExtArgs> | null
+    select?: ApplicationSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the MailId
+     * Omit specific fields from the Application
      */
-    omit?: MailIdOmit<ExtArgs> | null
+    omit?: ApplicationOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: MailIdInclude<ExtArgs> | null
+    include?: ApplicationInclude<ExtArgs> | null
+    where?: ApplicationWhereInput
+    orderBy?: ApplicationOrderByWithRelationInput | ApplicationOrderByWithRelationInput[]
+    cursor?: ApplicationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ApplicationScalarFieldEnum | ApplicationScalarFieldEnum[]
+  }
+
+  /**
+   * MailIdLog without action
+   */
+  export type MailIdLogDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MailIdLog
+     */
+    select?: MailIdLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MailIdLog
+     */
+    omit?: MailIdLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MailIdLogInclude<ExtArgs> | null
   }
 
 
@@ -5784,7 +5868,7 @@ export namespace Prisma {
 
   export const ApplicationScalarFieldEnum: {
     id: 'id',
-    userId: 'userId',
+    userRefId: 'userRefId',
     jobTitle: 'jobTitle',
     company: 'company',
     jobId: 'jobId',
@@ -5795,7 +5879,8 @@ export namespace Prisma {
     jobType: 'jobType',
     appliedAt: 'appliedAt',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    mailRefId: 'mailRefId'
   };
 
   export type ApplicationScalarFieldEnum = (typeof ApplicationScalarFieldEnum)[keyof typeof ApplicationScalarFieldEnum]
@@ -5803,7 +5888,7 @@ export namespace Prisma {
 
   export const UserPreferencesScalarFieldEnum: {
     id: 'id',
-    userId: 'userId',
+    userRefId: 'userRefId',
     syncFrequency: 'syncFrequency',
     emailNotifications: 'emailNotifications',
     whatsAppNotifications: 'whatsAppNotifications',
@@ -5814,17 +5899,17 @@ export namespace Prisma {
   export type UserPreferencesScalarFieldEnum = (typeof UserPreferencesScalarFieldEnum)[keyof typeof UserPreferencesScalarFieldEnum]
 
 
-  export const MailIdScalarFieldEnum: {
+  export const MailIdLogScalarFieldEnum: {
     id: 'id',
     mailId: 'mailId',
     threadId: 'threadId',
     status: 'status',
-    userId: 'userId',
+    userRefId: 'userRefId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
 
-  export type MailIdScalarFieldEnum = (typeof MailIdScalarFieldEnum)[keyof typeof MailIdScalarFieldEnum]
+  export type MailIdLogScalarFieldEnum = (typeof MailIdLogScalarFieldEnum)[keyof typeof MailIdLogScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -5948,9 +6033,9 @@ export namespace Prisma {
     credits?: IntFilter<"User"> | number
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
-    applications?: ApplicationListRelationFilter
+    applicationRefs?: ApplicationListRelationFilter
     UserPreferences?: XOR<UserPreferencesNullableScalarRelationFilter, UserPreferencesWhereInput> | null
-    MailId?: MailIdListRelationFilter
+    mailRefs?: MailIdLogListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -5962,9 +6047,9 @@ export namespace Prisma {
     credits?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    applications?: ApplicationOrderByRelationAggregateInput
+    applicationRefs?: ApplicationOrderByRelationAggregateInput
     UserPreferences?: UserPreferencesOrderByWithRelationInput
-    MailId?: MailIdOrderByRelationAggregateInput
+    mailRefs?: MailIdLogOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -5979,9 +6064,9 @@ export namespace Prisma {
     credits?: IntFilter<"User"> | number
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
-    applications?: ApplicationListRelationFilter
+    applicationRefs?: ApplicationListRelationFilter
     UserPreferences?: XOR<UserPreferencesNullableScalarRelationFilter, UserPreferencesWhereInput> | null
-    MailId?: MailIdListRelationFilter
+    mailRefs?: MailIdLogListRelationFilter
   }, "id" | "clerkUserId" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -6019,7 +6104,7 @@ export namespace Prisma {
     OR?: ApplicationWhereInput[]
     NOT?: ApplicationWhereInput | ApplicationWhereInput[]
     id?: StringFilter<"Application"> | string
-    userId?: StringFilter<"Application"> | string
+    userRefId?: StringFilter<"Application"> | string
     jobTitle?: StringFilter<"Application"> | string
     company?: StringFilter<"Application"> | string
     jobId?: StringNullableFilter<"Application"> | string | null
@@ -6031,12 +6116,14 @@ export namespace Prisma {
     appliedAt?: DateTimeFilter<"Application"> | Date | string
     createdAt?: DateTimeFilter<"Application"> | Date | string
     updatedAt?: DateTimeFilter<"Application"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    mailRefId?: StringFilter<"Application"> | string
+    userRef?: XOR<UserScalarRelationFilter, UserWhereInput>
+    mailRef?: XOR<MailIdLogScalarRelationFilter, MailIdLogWhereInput>
   }
 
   export type ApplicationOrderByWithRelationInput = {
     id?: SortOrder
-    userId?: SortOrder
+    userRefId?: SortOrder
     jobTitle?: SortOrder
     company?: SortOrder
     jobId?: SortOrderInput | SortOrder
@@ -6048,7 +6135,9 @@ export namespace Prisma {
     appliedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    user?: UserOrderByWithRelationInput
+    mailRefId?: SortOrder
+    userRef?: UserOrderByWithRelationInput
+    mailRef?: MailIdLogOrderByWithRelationInput
   }
 
   export type ApplicationWhereUniqueInput = Prisma.AtLeast<{
@@ -6056,7 +6145,7 @@ export namespace Prisma {
     AND?: ApplicationWhereInput | ApplicationWhereInput[]
     OR?: ApplicationWhereInput[]
     NOT?: ApplicationWhereInput | ApplicationWhereInput[]
-    userId?: StringFilter<"Application"> | string
+    userRefId?: StringFilter<"Application"> | string
     jobTitle?: StringFilter<"Application"> | string
     company?: StringFilter<"Application"> | string
     jobId?: StringNullableFilter<"Application"> | string | null
@@ -6068,12 +6157,14 @@ export namespace Prisma {
     appliedAt?: DateTimeFilter<"Application"> | Date | string
     createdAt?: DateTimeFilter<"Application"> | Date | string
     updatedAt?: DateTimeFilter<"Application"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    mailRefId?: StringFilter<"Application"> | string
+    userRef?: XOR<UserScalarRelationFilter, UserWhereInput>
+    mailRef?: XOR<MailIdLogScalarRelationFilter, MailIdLogWhereInput>
   }, "id">
 
   export type ApplicationOrderByWithAggregationInput = {
     id?: SortOrder
-    userId?: SortOrder
+    userRefId?: SortOrder
     jobTitle?: SortOrder
     company?: SortOrder
     jobId?: SortOrderInput | SortOrder
@@ -6085,6 +6176,7 @@ export namespace Prisma {
     appliedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    mailRefId?: SortOrder
     _count?: ApplicationCountOrderByAggregateInput
     _max?: ApplicationMaxOrderByAggregateInput
     _min?: ApplicationMinOrderByAggregateInput
@@ -6095,7 +6187,7 @@ export namespace Prisma {
     OR?: ApplicationScalarWhereWithAggregatesInput[]
     NOT?: ApplicationScalarWhereWithAggregatesInput | ApplicationScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Application"> | string
-    userId?: StringWithAggregatesFilter<"Application"> | string
+    userRefId?: StringWithAggregatesFilter<"Application"> | string
     jobTitle?: StringWithAggregatesFilter<"Application"> | string
     company?: StringWithAggregatesFilter<"Application"> | string
     jobId?: StringNullableWithAggregatesFilter<"Application"> | string | null
@@ -6107,6 +6199,7 @@ export namespace Prisma {
     appliedAt?: DateTimeWithAggregatesFilter<"Application"> | Date | string
     createdAt?: DateTimeWithAggregatesFilter<"Application"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Application"> | Date | string
+    mailRefId?: StringWithAggregatesFilter<"Application"> | string
   }
 
   export type UserPreferencesWhereInput = {
@@ -6114,29 +6207,29 @@ export namespace Prisma {
     OR?: UserPreferencesWhereInput[]
     NOT?: UserPreferencesWhereInput | UserPreferencesWhereInput[]
     id?: StringFilter<"UserPreferences"> | string
-    userId?: StringFilter<"UserPreferences"> | string
+    userRefId?: StringFilter<"UserPreferences"> | string
     syncFrequency?: IntFilter<"UserPreferences"> | number
     emailNotifications?: BoolFilter<"UserPreferences"> | boolean
     whatsAppNotifications?: BoolFilter<"UserPreferences"> | boolean
     createdAt?: DateTimeFilter<"UserPreferences"> | Date | string
     updatedAt?: DateTimeFilter<"UserPreferences"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    userRef?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type UserPreferencesOrderByWithRelationInput = {
     id?: SortOrder
-    userId?: SortOrder
+    userRefId?: SortOrder
     syncFrequency?: SortOrder
     emailNotifications?: SortOrder
     whatsAppNotifications?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    user?: UserOrderByWithRelationInput
+    userRef?: UserOrderByWithRelationInput
   }
 
   export type UserPreferencesWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    userId?: string
+    userRefId?: string
     AND?: UserPreferencesWhereInput | UserPreferencesWhereInput[]
     OR?: UserPreferencesWhereInput[]
     NOT?: UserPreferencesWhereInput | UserPreferencesWhereInput[]
@@ -6145,12 +6238,12 @@ export namespace Prisma {
     whatsAppNotifications?: BoolFilter<"UserPreferences"> | boolean
     createdAt?: DateTimeFilter<"UserPreferences"> | Date | string
     updatedAt?: DateTimeFilter<"UserPreferences"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id" | "userId">
+    userRef?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "userRefId">
 
   export type UserPreferencesOrderByWithAggregationInput = {
     id?: SortOrder
-    userId?: SortOrder
+    userRefId?: SortOrder
     syncFrequency?: SortOrder
     emailNotifications?: SortOrder
     whatsAppNotifications?: SortOrder
@@ -6168,7 +6261,7 @@ export namespace Prisma {
     OR?: UserPreferencesScalarWhereWithAggregatesInput[]
     NOT?: UserPreferencesScalarWhereWithAggregatesInput | UserPreferencesScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"UserPreferences"> | string
-    userId?: StringWithAggregatesFilter<"UserPreferences"> | string
+    userRefId?: StringWithAggregatesFilter<"UserPreferences"> | string
     syncFrequency?: IntWithAggregatesFilter<"UserPreferences"> | number
     emailNotifications?: BoolWithAggregatesFilter<"UserPreferences"> | boolean
     whatsAppNotifications?: BoolWithAggregatesFilter<"UserPreferences"> | boolean
@@ -6176,69 +6269,72 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"UserPreferences"> | Date | string
   }
 
-  export type MailIdWhereInput = {
-    AND?: MailIdWhereInput | MailIdWhereInput[]
-    OR?: MailIdWhereInput[]
-    NOT?: MailIdWhereInput | MailIdWhereInput[]
-    id?: StringFilter<"MailId"> | string
-    mailId?: StringFilter<"MailId"> | string
-    threadId?: StringFilter<"MailId"> | string
-    status?: EnumMailStatusFilter<"MailId"> | $Enums.MailStatus
-    userId?: StringFilter<"MailId"> | string
-    createdAt?: DateTimeFilter<"MailId"> | Date | string
-    updatedAt?: DateTimeFilter<"MailId"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  export type MailIdLogWhereInput = {
+    AND?: MailIdLogWhereInput | MailIdLogWhereInput[]
+    OR?: MailIdLogWhereInput[]
+    NOT?: MailIdLogWhereInput | MailIdLogWhereInput[]
+    id?: StringFilter<"MailIdLog"> | string
+    mailId?: StringFilter<"MailIdLog"> | string
+    threadId?: StringFilter<"MailIdLog"> | string
+    status?: EnumMailStatusFilter<"MailIdLog"> | $Enums.MailStatus
+    userRefId?: StringFilter<"MailIdLog"> | string
+    createdAt?: DateTimeFilter<"MailIdLog"> | Date | string
+    updatedAt?: DateTimeFilter<"MailIdLog"> | Date | string
+    userRef?: XOR<UserScalarRelationFilter, UserWhereInput>
+    applicationRefs?: ApplicationListRelationFilter
   }
 
-  export type MailIdOrderByWithRelationInput = {
+  export type MailIdLogOrderByWithRelationInput = {
     id?: SortOrder
     mailId?: SortOrder
     threadId?: SortOrder
     status?: SortOrder
-    userId?: SortOrder
+    userRefId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    user?: UserOrderByWithRelationInput
+    userRef?: UserOrderByWithRelationInput
+    applicationRefs?: ApplicationOrderByRelationAggregateInput
   }
 
-  export type MailIdWhereUniqueInput = Prisma.AtLeast<{
+  export type MailIdLogWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     mailId?: string
-    AND?: MailIdWhereInput | MailIdWhereInput[]
-    OR?: MailIdWhereInput[]
-    NOT?: MailIdWhereInput | MailIdWhereInput[]
-    threadId?: StringFilter<"MailId"> | string
-    status?: EnumMailStatusFilter<"MailId"> | $Enums.MailStatus
-    userId?: StringFilter<"MailId"> | string
-    createdAt?: DateTimeFilter<"MailId"> | Date | string
-    updatedAt?: DateTimeFilter<"MailId"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    AND?: MailIdLogWhereInput | MailIdLogWhereInput[]
+    OR?: MailIdLogWhereInput[]
+    NOT?: MailIdLogWhereInput | MailIdLogWhereInput[]
+    threadId?: StringFilter<"MailIdLog"> | string
+    status?: EnumMailStatusFilter<"MailIdLog"> | $Enums.MailStatus
+    userRefId?: StringFilter<"MailIdLog"> | string
+    createdAt?: DateTimeFilter<"MailIdLog"> | Date | string
+    updatedAt?: DateTimeFilter<"MailIdLog"> | Date | string
+    userRef?: XOR<UserScalarRelationFilter, UserWhereInput>
+    applicationRefs?: ApplicationListRelationFilter
   }, "id" | "mailId">
 
-  export type MailIdOrderByWithAggregationInput = {
+  export type MailIdLogOrderByWithAggregationInput = {
     id?: SortOrder
     mailId?: SortOrder
     threadId?: SortOrder
     status?: SortOrder
-    userId?: SortOrder
+    userRefId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    _count?: MailIdCountOrderByAggregateInput
-    _max?: MailIdMaxOrderByAggregateInput
-    _min?: MailIdMinOrderByAggregateInput
+    _count?: MailIdLogCountOrderByAggregateInput
+    _max?: MailIdLogMaxOrderByAggregateInput
+    _min?: MailIdLogMinOrderByAggregateInput
   }
 
-  export type MailIdScalarWhereWithAggregatesInput = {
-    AND?: MailIdScalarWhereWithAggregatesInput | MailIdScalarWhereWithAggregatesInput[]
-    OR?: MailIdScalarWhereWithAggregatesInput[]
-    NOT?: MailIdScalarWhereWithAggregatesInput | MailIdScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"MailId"> | string
-    mailId?: StringWithAggregatesFilter<"MailId"> | string
-    threadId?: StringWithAggregatesFilter<"MailId"> | string
-    status?: EnumMailStatusWithAggregatesFilter<"MailId"> | $Enums.MailStatus
-    userId?: StringWithAggregatesFilter<"MailId"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"MailId"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"MailId"> | Date | string
+  export type MailIdLogScalarWhereWithAggregatesInput = {
+    AND?: MailIdLogScalarWhereWithAggregatesInput | MailIdLogScalarWhereWithAggregatesInput[]
+    OR?: MailIdLogScalarWhereWithAggregatesInput[]
+    NOT?: MailIdLogScalarWhereWithAggregatesInput | MailIdLogScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"MailIdLog"> | string
+    mailId?: StringWithAggregatesFilter<"MailIdLog"> | string
+    threadId?: StringWithAggregatesFilter<"MailIdLog"> | string
+    status?: EnumMailStatusWithAggregatesFilter<"MailIdLog"> | $Enums.MailStatus
+    userRefId?: StringWithAggregatesFilter<"MailIdLog"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"MailIdLog"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"MailIdLog"> | Date | string
   }
 
   export type UserCreateInput = {
@@ -6250,9 +6346,9 @@ export namespace Prisma {
     credits?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    applications?: ApplicationCreateNestedManyWithoutUserInput
-    UserPreferences?: UserPreferencesCreateNestedOneWithoutUserInput
-    MailId?: MailIdCreateNestedManyWithoutUserInput
+    applicationRefs?: ApplicationCreateNestedManyWithoutUserRefInput
+    UserPreferences?: UserPreferencesCreateNestedOneWithoutUserRefInput
+    mailRefs?: MailIdLogCreateNestedManyWithoutUserRefInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -6264,9 +6360,9 @@ export namespace Prisma {
     credits?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    applications?: ApplicationUncheckedCreateNestedManyWithoutUserInput
-    UserPreferences?: UserPreferencesUncheckedCreateNestedOneWithoutUserInput
-    MailId?: MailIdUncheckedCreateNestedManyWithoutUserInput
+    applicationRefs?: ApplicationUncheckedCreateNestedManyWithoutUserRefInput
+    UserPreferences?: UserPreferencesUncheckedCreateNestedOneWithoutUserRefInput
+    mailRefs?: MailIdLogUncheckedCreateNestedManyWithoutUserRefInput
   }
 
   export type UserUpdateInput = {
@@ -6278,9 +6374,9 @@ export namespace Prisma {
     credits?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    applications?: ApplicationUpdateManyWithoutUserNestedInput
-    UserPreferences?: UserPreferencesUpdateOneWithoutUserNestedInput
-    MailId?: MailIdUpdateManyWithoutUserNestedInput
+    applicationRefs?: ApplicationUpdateManyWithoutUserRefNestedInput
+    UserPreferences?: UserPreferencesUpdateOneWithoutUserRefNestedInput
+    mailRefs?: MailIdLogUpdateManyWithoutUserRefNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -6292,9 +6388,9 @@ export namespace Prisma {
     credits?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    applications?: ApplicationUncheckedUpdateManyWithoutUserNestedInput
-    UserPreferences?: UserPreferencesUncheckedUpdateOneWithoutUserNestedInput
-    MailId?: MailIdUncheckedUpdateManyWithoutUserNestedInput
+    applicationRefs?: ApplicationUncheckedUpdateManyWithoutUserRefNestedInput
+    UserPreferences?: UserPreferencesUncheckedUpdateOneWithoutUserRefNestedInput
+    mailRefs?: MailIdLogUncheckedUpdateManyWithoutUserRefNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -6343,12 +6439,13 @@ export namespace Prisma {
     appliedAt: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutApplicationsInput
+    userRef: UserCreateNestedOneWithoutApplicationRefsInput
+    mailRef: MailIdLogCreateNestedOneWithoutApplicationRefsInput
   }
 
   export type ApplicationUncheckedCreateInput = {
     id?: string
-    userId: string
+    userRefId: string
     jobTitle: string
     company: string
     jobId?: string | null
@@ -6360,6 +6457,7 @@ export namespace Prisma {
     appliedAt: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    mailRefId: string
   }
 
   export type ApplicationUpdateInput = {
@@ -6375,12 +6473,13 @@ export namespace Prisma {
     appliedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutApplicationsNestedInput
+    userRef?: UserUpdateOneRequiredWithoutApplicationRefsNestedInput
+    mailRef?: MailIdLogUpdateOneRequiredWithoutApplicationRefsNestedInput
   }
 
   export type ApplicationUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
+    userRefId?: StringFieldUpdateOperationsInput | string
     jobTitle?: StringFieldUpdateOperationsInput | string
     company?: StringFieldUpdateOperationsInput | string
     jobId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -6392,11 +6491,12 @@ export namespace Prisma {
     appliedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    mailRefId?: StringFieldUpdateOperationsInput | string
   }
 
   export type ApplicationCreateManyInput = {
     id?: string
-    userId: string
+    userRefId: string
     jobTitle: string
     company: string
     jobId?: string | null
@@ -6408,6 +6508,7 @@ export namespace Prisma {
     appliedAt: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    mailRefId: string
   }
 
   export type ApplicationUpdateManyMutationInput = {
@@ -6427,7 +6528,7 @@ export namespace Prisma {
 
   export type ApplicationUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
+    userRefId?: StringFieldUpdateOperationsInput | string
     jobTitle?: StringFieldUpdateOperationsInput | string
     company?: StringFieldUpdateOperationsInput | string
     jobId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -6439,6 +6540,7 @@ export namespace Prisma {
     appliedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    mailRefId?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserPreferencesCreateInput = {
@@ -6448,12 +6550,12 @@ export namespace Prisma {
     whatsAppNotifications?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutUserPreferencesInput
+    userRef: UserCreateNestedOneWithoutUserPreferencesInput
   }
 
   export type UserPreferencesUncheckedCreateInput = {
     id?: string
-    userId: string
+    userRefId: string
     syncFrequency?: number
     emailNotifications?: boolean
     whatsAppNotifications?: boolean
@@ -6468,12 +6570,12 @@ export namespace Prisma {
     whatsAppNotifications?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutUserPreferencesNestedInput
+    userRef?: UserUpdateOneRequiredWithoutUserPreferencesNestedInput
   }
 
   export type UserPreferencesUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
+    userRefId?: StringFieldUpdateOperationsInput | string
     syncFrequency?: IntFieldUpdateOperationsInput | number
     emailNotifications?: BoolFieldUpdateOperationsInput | boolean
     whatsAppNotifications?: BoolFieldUpdateOperationsInput | boolean
@@ -6483,7 +6585,7 @@ export namespace Prisma {
 
   export type UserPreferencesCreateManyInput = {
     id?: string
-    userId: string
+    userRefId: string
     syncFrequency?: number
     emailNotifications?: boolean
     whatsAppNotifications?: boolean
@@ -6502,7 +6604,7 @@ export namespace Prisma {
 
   export type UserPreferencesUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
+    userRefId?: StringFieldUpdateOperationsInput | string
     syncFrequency?: IntFieldUpdateOperationsInput | number
     emailNotifications?: BoolFieldUpdateOperationsInput | boolean
     whatsAppNotifications?: BoolFieldUpdateOperationsInput | boolean
@@ -6510,57 +6612,61 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type MailIdCreateInput = {
+  export type MailIdLogCreateInput = {
     id?: string
     mailId: string
     threadId: string
     status?: $Enums.MailStatus
     createdAt?: Date | string
     updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutMailIdInput
+    userRef: UserCreateNestedOneWithoutMailRefsInput
+    applicationRefs?: ApplicationCreateNestedManyWithoutMailRefInput
   }
 
-  export type MailIdUncheckedCreateInput = {
+  export type MailIdLogUncheckedCreateInput = {
     id?: string
     mailId: string
     threadId: string
     status?: $Enums.MailStatus
-    userId: string
+    userRefId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    applicationRefs?: ApplicationUncheckedCreateNestedManyWithoutMailRefInput
   }
 
-  export type MailIdUpdateInput = {
+  export type MailIdLogUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     mailId?: StringFieldUpdateOperationsInput | string
     threadId?: StringFieldUpdateOperationsInput | string
     status?: EnumMailStatusFieldUpdateOperationsInput | $Enums.MailStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutMailIdNestedInput
+    userRef?: UserUpdateOneRequiredWithoutMailRefsNestedInput
+    applicationRefs?: ApplicationUpdateManyWithoutMailRefNestedInput
   }
 
-  export type MailIdUncheckedUpdateInput = {
+  export type MailIdLogUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     mailId?: StringFieldUpdateOperationsInput | string
     threadId?: StringFieldUpdateOperationsInput | string
     status?: EnumMailStatusFieldUpdateOperationsInput | $Enums.MailStatus
-    userId?: StringFieldUpdateOperationsInput | string
+    userRefId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    applicationRefs?: ApplicationUncheckedUpdateManyWithoutMailRefNestedInput
   }
 
-  export type MailIdCreateManyInput = {
+  export type MailIdLogCreateManyInput = {
     id?: string
     mailId: string
     threadId: string
     status?: $Enums.MailStatus
-    userId: string
+    userRefId: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
-  export type MailIdUpdateManyMutationInput = {
+  export type MailIdLogUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     mailId?: StringFieldUpdateOperationsInput | string
     threadId?: StringFieldUpdateOperationsInput | string
@@ -6569,12 +6675,12 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type MailIdUncheckedUpdateManyInput = {
+  export type MailIdLogUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     mailId?: StringFieldUpdateOperationsInput | string
     threadId?: StringFieldUpdateOperationsInput | string
     status?: EnumMailStatusFieldUpdateOperationsInput | $Enums.MailStatus
-    userId?: StringFieldUpdateOperationsInput | string
+    userRefId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -6642,10 +6748,10 @@ export namespace Prisma {
     isNot?: UserPreferencesWhereInput | null
   }
 
-  export type MailIdListRelationFilter = {
-    every?: MailIdWhereInput
-    some?: MailIdWhereInput
-    none?: MailIdWhereInput
+  export type MailIdLogListRelationFilter = {
+    every?: MailIdLogWhereInput
+    some?: MailIdLogWhereInput
+    none?: MailIdLogWhereInput
   }
 
   export type SortOrderInput = {
@@ -6657,7 +6763,7 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
-  export type MailIdOrderByRelationAggregateInput = {
+  export type MailIdLogOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -6781,9 +6887,14 @@ export namespace Prisma {
     isNot?: UserWhereInput
   }
 
+  export type MailIdLogScalarRelationFilter = {
+    is?: MailIdLogWhereInput
+    isNot?: MailIdLogWhereInput
+  }
+
   export type ApplicationCountOrderByAggregateInput = {
     id?: SortOrder
-    userId?: SortOrder
+    userRefId?: SortOrder
     jobTitle?: SortOrder
     company?: SortOrder
     jobId?: SortOrder
@@ -6795,11 +6906,12 @@ export namespace Prisma {
     appliedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    mailRefId?: SortOrder
   }
 
   export type ApplicationMaxOrderByAggregateInput = {
     id?: SortOrder
-    userId?: SortOrder
+    userRefId?: SortOrder
     jobTitle?: SortOrder
     company?: SortOrder
     jobId?: SortOrder
@@ -6810,11 +6922,12 @@ export namespace Prisma {
     appliedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    mailRefId?: SortOrder
   }
 
   export type ApplicationMinOrderByAggregateInput = {
     id?: SortOrder
-    userId?: SortOrder
+    userRefId?: SortOrder
     jobTitle?: SortOrder
     company?: SortOrder
     jobId?: SortOrder
@@ -6825,6 +6938,7 @@ export namespace Prisma {
     appliedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    mailRefId?: SortOrder
   }
 
   export type BoolFilter<$PrismaModel = never> = {
@@ -6834,7 +6948,7 @@ export namespace Prisma {
 
   export type UserPreferencesCountOrderByAggregateInput = {
     id?: SortOrder
-    userId?: SortOrder
+    userRefId?: SortOrder
     syncFrequency?: SortOrder
     emailNotifications?: SortOrder
     whatsAppNotifications?: SortOrder
@@ -6848,7 +6962,7 @@ export namespace Prisma {
 
   export type UserPreferencesMaxOrderByAggregateInput = {
     id?: SortOrder
-    userId?: SortOrder
+    userRefId?: SortOrder
     syncFrequency?: SortOrder
     emailNotifications?: SortOrder
     whatsAppNotifications?: SortOrder
@@ -6858,7 +6972,7 @@ export namespace Prisma {
 
   export type UserPreferencesMinOrderByAggregateInput = {
     id?: SortOrder
-    userId?: SortOrder
+    userRefId?: SortOrder
     syncFrequency?: SortOrder
     emailNotifications?: SortOrder
     whatsAppNotifications?: SortOrder
@@ -6885,32 +6999,32 @@ export namespace Prisma {
     not?: NestedEnumMailStatusFilter<$PrismaModel> | $Enums.MailStatus
   }
 
-  export type MailIdCountOrderByAggregateInput = {
+  export type MailIdLogCountOrderByAggregateInput = {
     id?: SortOrder
     mailId?: SortOrder
     threadId?: SortOrder
     status?: SortOrder
-    userId?: SortOrder
+    userRefId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
-  export type MailIdMaxOrderByAggregateInput = {
+  export type MailIdLogMaxOrderByAggregateInput = {
     id?: SortOrder
     mailId?: SortOrder
     threadId?: SortOrder
     status?: SortOrder
-    userId?: SortOrder
+    userRefId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
-  export type MailIdMinOrderByAggregateInput = {
+  export type MailIdLogMinOrderByAggregateInput = {
     id?: SortOrder
     mailId?: SortOrder
     threadId?: SortOrder
     status?: SortOrder
-    userId?: SortOrder
+    userRefId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -6925,44 +7039,44 @@ export namespace Prisma {
     _max?: NestedEnumMailStatusFilter<$PrismaModel>
   }
 
-  export type ApplicationCreateNestedManyWithoutUserInput = {
-    create?: XOR<ApplicationCreateWithoutUserInput, ApplicationUncheckedCreateWithoutUserInput> | ApplicationCreateWithoutUserInput[] | ApplicationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ApplicationCreateOrConnectWithoutUserInput | ApplicationCreateOrConnectWithoutUserInput[]
-    createMany?: ApplicationCreateManyUserInputEnvelope
+  export type ApplicationCreateNestedManyWithoutUserRefInput = {
+    create?: XOR<ApplicationCreateWithoutUserRefInput, ApplicationUncheckedCreateWithoutUserRefInput> | ApplicationCreateWithoutUserRefInput[] | ApplicationUncheckedCreateWithoutUserRefInput[]
+    connectOrCreate?: ApplicationCreateOrConnectWithoutUserRefInput | ApplicationCreateOrConnectWithoutUserRefInput[]
+    createMany?: ApplicationCreateManyUserRefInputEnvelope
     connect?: ApplicationWhereUniqueInput | ApplicationWhereUniqueInput[]
   }
 
-  export type UserPreferencesCreateNestedOneWithoutUserInput = {
-    create?: XOR<UserPreferencesCreateWithoutUserInput, UserPreferencesUncheckedCreateWithoutUserInput>
-    connectOrCreate?: UserPreferencesCreateOrConnectWithoutUserInput
+  export type UserPreferencesCreateNestedOneWithoutUserRefInput = {
+    create?: XOR<UserPreferencesCreateWithoutUserRefInput, UserPreferencesUncheckedCreateWithoutUserRefInput>
+    connectOrCreate?: UserPreferencesCreateOrConnectWithoutUserRefInput
     connect?: UserPreferencesWhereUniqueInput
   }
 
-  export type MailIdCreateNestedManyWithoutUserInput = {
-    create?: XOR<MailIdCreateWithoutUserInput, MailIdUncheckedCreateWithoutUserInput> | MailIdCreateWithoutUserInput[] | MailIdUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: MailIdCreateOrConnectWithoutUserInput | MailIdCreateOrConnectWithoutUserInput[]
-    createMany?: MailIdCreateManyUserInputEnvelope
-    connect?: MailIdWhereUniqueInput | MailIdWhereUniqueInput[]
+  export type MailIdLogCreateNestedManyWithoutUserRefInput = {
+    create?: XOR<MailIdLogCreateWithoutUserRefInput, MailIdLogUncheckedCreateWithoutUserRefInput> | MailIdLogCreateWithoutUserRefInput[] | MailIdLogUncheckedCreateWithoutUserRefInput[]
+    connectOrCreate?: MailIdLogCreateOrConnectWithoutUserRefInput | MailIdLogCreateOrConnectWithoutUserRefInput[]
+    createMany?: MailIdLogCreateManyUserRefInputEnvelope
+    connect?: MailIdLogWhereUniqueInput | MailIdLogWhereUniqueInput[]
   }
 
-  export type ApplicationUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<ApplicationCreateWithoutUserInput, ApplicationUncheckedCreateWithoutUserInput> | ApplicationCreateWithoutUserInput[] | ApplicationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ApplicationCreateOrConnectWithoutUserInput | ApplicationCreateOrConnectWithoutUserInput[]
-    createMany?: ApplicationCreateManyUserInputEnvelope
+  export type ApplicationUncheckedCreateNestedManyWithoutUserRefInput = {
+    create?: XOR<ApplicationCreateWithoutUserRefInput, ApplicationUncheckedCreateWithoutUserRefInput> | ApplicationCreateWithoutUserRefInput[] | ApplicationUncheckedCreateWithoutUserRefInput[]
+    connectOrCreate?: ApplicationCreateOrConnectWithoutUserRefInput | ApplicationCreateOrConnectWithoutUserRefInput[]
+    createMany?: ApplicationCreateManyUserRefInputEnvelope
     connect?: ApplicationWhereUniqueInput | ApplicationWhereUniqueInput[]
   }
 
-  export type UserPreferencesUncheckedCreateNestedOneWithoutUserInput = {
-    create?: XOR<UserPreferencesCreateWithoutUserInput, UserPreferencesUncheckedCreateWithoutUserInput>
-    connectOrCreate?: UserPreferencesCreateOrConnectWithoutUserInput
+  export type UserPreferencesUncheckedCreateNestedOneWithoutUserRefInput = {
+    create?: XOR<UserPreferencesCreateWithoutUserRefInput, UserPreferencesUncheckedCreateWithoutUserRefInput>
+    connectOrCreate?: UserPreferencesCreateOrConnectWithoutUserRefInput
     connect?: UserPreferencesWhereUniqueInput
   }
 
-  export type MailIdUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<MailIdCreateWithoutUserInput, MailIdUncheckedCreateWithoutUserInput> | MailIdCreateWithoutUserInput[] | MailIdUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: MailIdCreateOrConnectWithoutUserInput | MailIdCreateOrConnectWithoutUserInput[]
-    createMany?: MailIdCreateManyUserInputEnvelope
-    connect?: MailIdWhereUniqueInput | MailIdWhereUniqueInput[]
+  export type MailIdLogUncheckedCreateNestedManyWithoutUserRefInput = {
+    create?: XOR<MailIdLogCreateWithoutUserRefInput, MailIdLogUncheckedCreateWithoutUserRefInput> | MailIdLogCreateWithoutUserRefInput[] | MailIdLogUncheckedCreateWithoutUserRefInput[]
+    connectOrCreate?: MailIdLogCreateOrConnectWithoutUserRefInput | MailIdLogCreateOrConnectWithoutUserRefInput[]
+    createMany?: MailIdLogCreateManyUserRefInputEnvelope
+    connect?: MailIdLogWhereUniqueInput | MailIdLogWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -6985,90 +7099,96 @@ export namespace Prisma {
     set?: Date | string
   }
 
-  export type ApplicationUpdateManyWithoutUserNestedInput = {
-    create?: XOR<ApplicationCreateWithoutUserInput, ApplicationUncheckedCreateWithoutUserInput> | ApplicationCreateWithoutUserInput[] | ApplicationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ApplicationCreateOrConnectWithoutUserInput | ApplicationCreateOrConnectWithoutUserInput[]
-    upsert?: ApplicationUpsertWithWhereUniqueWithoutUserInput | ApplicationUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: ApplicationCreateManyUserInputEnvelope
+  export type ApplicationUpdateManyWithoutUserRefNestedInput = {
+    create?: XOR<ApplicationCreateWithoutUserRefInput, ApplicationUncheckedCreateWithoutUserRefInput> | ApplicationCreateWithoutUserRefInput[] | ApplicationUncheckedCreateWithoutUserRefInput[]
+    connectOrCreate?: ApplicationCreateOrConnectWithoutUserRefInput | ApplicationCreateOrConnectWithoutUserRefInput[]
+    upsert?: ApplicationUpsertWithWhereUniqueWithoutUserRefInput | ApplicationUpsertWithWhereUniqueWithoutUserRefInput[]
+    createMany?: ApplicationCreateManyUserRefInputEnvelope
     set?: ApplicationWhereUniqueInput | ApplicationWhereUniqueInput[]
     disconnect?: ApplicationWhereUniqueInput | ApplicationWhereUniqueInput[]
     delete?: ApplicationWhereUniqueInput | ApplicationWhereUniqueInput[]
     connect?: ApplicationWhereUniqueInput | ApplicationWhereUniqueInput[]
-    update?: ApplicationUpdateWithWhereUniqueWithoutUserInput | ApplicationUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: ApplicationUpdateManyWithWhereWithoutUserInput | ApplicationUpdateManyWithWhereWithoutUserInput[]
+    update?: ApplicationUpdateWithWhereUniqueWithoutUserRefInput | ApplicationUpdateWithWhereUniqueWithoutUserRefInput[]
+    updateMany?: ApplicationUpdateManyWithWhereWithoutUserRefInput | ApplicationUpdateManyWithWhereWithoutUserRefInput[]
     deleteMany?: ApplicationScalarWhereInput | ApplicationScalarWhereInput[]
   }
 
-  export type UserPreferencesUpdateOneWithoutUserNestedInput = {
-    create?: XOR<UserPreferencesCreateWithoutUserInput, UserPreferencesUncheckedCreateWithoutUserInput>
-    connectOrCreate?: UserPreferencesCreateOrConnectWithoutUserInput
-    upsert?: UserPreferencesUpsertWithoutUserInput
+  export type UserPreferencesUpdateOneWithoutUserRefNestedInput = {
+    create?: XOR<UserPreferencesCreateWithoutUserRefInput, UserPreferencesUncheckedCreateWithoutUserRefInput>
+    connectOrCreate?: UserPreferencesCreateOrConnectWithoutUserRefInput
+    upsert?: UserPreferencesUpsertWithoutUserRefInput
     disconnect?: UserPreferencesWhereInput | boolean
     delete?: UserPreferencesWhereInput | boolean
     connect?: UserPreferencesWhereUniqueInput
-    update?: XOR<XOR<UserPreferencesUpdateToOneWithWhereWithoutUserInput, UserPreferencesUpdateWithoutUserInput>, UserPreferencesUncheckedUpdateWithoutUserInput>
+    update?: XOR<XOR<UserPreferencesUpdateToOneWithWhereWithoutUserRefInput, UserPreferencesUpdateWithoutUserRefInput>, UserPreferencesUncheckedUpdateWithoutUserRefInput>
   }
 
-  export type MailIdUpdateManyWithoutUserNestedInput = {
-    create?: XOR<MailIdCreateWithoutUserInput, MailIdUncheckedCreateWithoutUserInput> | MailIdCreateWithoutUserInput[] | MailIdUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: MailIdCreateOrConnectWithoutUserInput | MailIdCreateOrConnectWithoutUserInput[]
-    upsert?: MailIdUpsertWithWhereUniqueWithoutUserInput | MailIdUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: MailIdCreateManyUserInputEnvelope
-    set?: MailIdWhereUniqueInput | MailIdWhereUniqueInput[]
-    disconnect?: MailIdWhereUniqueInput | MailIdWhereUniqueInput[]
-    delete?: MailIdWhereUniqueInput | MailIdWhereUniqueInput[]
-    connect?: MailIdWhereUniqueInput | MailIdWhereUniqueInput[]
-    update?: MailIdUpdateWithWhereUniqueWithoutUserInput | MailIdUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: MailIdUpdateManyWithWhereWithoutUserInput | MailIdUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: MailIdScalarWhereInput | MailIdScalarWhereInput[]
+  export type MailIdLogUpdateManyWithoutUserRefNestedInput = {
+    create?: XOR<MailIdLogCreateWithoutUserRefInput, MailIdLogUncheckedCreateWithoutUserRefInput> | MailIdLogCreateWithoutUserRefInput[] | MailIdLogUncheckedCreateWithoutUserRefInput[]
+    connectOrCreate?: MailIdLogCreateOrConnectWithoutUserRefInput | MailIdLogCreateOrConnectWithoutUserRefInput[]
+    upsert?: MailIdLogUpsertWithWhereUniqueWithoutUserRefInput | MailIdLogUpsertWithWhereUniqueWithoutUserRefInput[]
+    createMany?: MailIdLogCreateManyUserRefInputEnvelope
+    set?: MailIdLogWhereUniqueInput | MailIdLogWhereUniqueInput[]
+    disconnect?: MailIdLogWhereUniqueInput | MailIdLogWhereUniqueInput[]
+    delete?: MailIdLogWhereUniqueInput | MailIdLogWhereUniqueInput[]
+    connect?: MailIdLogWhereUniqueInput | MailIdLogWhereUniqueInput[]
+    update?: MailIdLogUpdateWithWhereUniqueWithoutUserRefInput | MailIdLogUpdateWithWhereUniqueWithoutUserRefInput[]
+    updateMany?: MailIdLogUpdateManyWithWhereWithoutUserRefInput | MailIdLogUpdateManyWithWhereWithoutUserRefInput[]
+    deleteMany?: MailIdLogScalarWhereInput | MailIdLogScalarWhereInput[]
   }
 
-  export type ApplicationUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<ApplicationCreateWithoutUserInput, ApplicationUncheckedCreateWithoutUserInput> | ApplicationCreateWithoutUserInput[] | ApplicationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ApplicationCreateOrConnectWithoutUserInput | ApplicationCreateOrConnectWithoutUserInput[]
-    upsert?: ApplicationUpsertWithWhereUniqueWithoutUserInput | ApplicationUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: ApplicationCreateManyUserInputEnvelope
+  export type ApplicationUncheckedUpdateManyWithoutUserRefNestedInput = {
+    create?: XOR<ApplicationCreateWithoutUserRefInput, ApplicationUncheckedCreateWithoutUserRefInput> | ApplicationCreateWithoutUserRefInput[] | ApplicationUncheckedCreateWithoutUserRefInput[]
+    connectOrCreate?: ApplicationCreateOrConnectWithoutUserRefInput | ApplicationCreateOrConnectWithoutUserRefInput[]
+    upsert?: ApplicationUpsertWithWhereUniqueWithoutUserRefInput | ApplicationUpsertWithWhereUniqueWithoutUserRefInput[]
+    createMany?: ApplicationCreateManyUserRefInputEnvelope
     set?: ApplicationWhereUniqueInput | ApplicationWhereUniqueInput[]
     disconnect?: ApplicationWhereUniqueInput | ApplicationWhereUniqueInput[]
     delete?: ApplicationWhereUniqueInput | ApplicationWhereUniqueInput[]
     connect?: ApplicationWhereUniqueInput | ApplicationWhereUniqueInput[]
-    update?: ApplicationUpdateWithWhereUniqueWithoutUserInput | ApplicationUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: ApplicationUpdateManyWithWhereWithoutUserInput | ApplicationUpdateManyWithWhereWithoutUserInput[]
+    update?: ApplicationUpdateWithWhereUniqueWithoutUserRefInput | ApplicationUpdateWithWhereUniqueWithoutUserRefInput[]
+    updateMany?: ApplicationUpdateManyWithWhereWithoutUserRefInput | ApplicationUpdateManyWithWhereWithoutUserRefInput[]
     deleteMany?: ApplicationScalarWhereInput | ApplicationScalarWhereInput[]
   }
 
-  export type UserPreferencesUncheckedUpdateOneWithoutUserNestedInput = {
-    create?: XOR<UserPreferencesCreateWithoutUserInput, UserPreferencesUncheckedCreateWithoutUserInput>
-    connectOrCreate?: UserPreferencesCreateOrConnectWithoutUserInput
-    upsert?: UserPreferencesUpsertWithoutUserInput
+  export type UserPreferencesUncheckedUpdateOneWithoutUserRefNestedInput = {
+    create?: XOR<UserPreferencesCreateWithoutUserRefInput, UserPreferencesUncheckedCreateWithoutUserRefInput>
+    connectOrCreate?: UserPreferencesCreateOrConnectWithoutUserRefInput
+    upsert?: UserPreferencesUpsertWithoutUserRefInput
     disconnect?: UserPreferencesWhereInput | boolean
     delete?: UserPreferencesWhereInput | boolean
     connect?: UserPreferencesWhereUniqueInput
-    update?: XOR<XOR<UserPreferencesUpdateToOneWithWhereWithoutUserInput, UserPreferencesUpdateWithoutUserInput>, UserPreferencesUncheckedUpdateWithoutUserInput>
+    update?: XOR<XOR<UserPreferencesUpdateToOneWithWhereWithoutUserRefInput, UserPreferencesUpdateWithoutUserRefInput>, UserPreferencesUncheckedUpdateWithoutUserRefInput>
   }
 
-  export type MailIdUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<MailIdCreateWithoutUserInput, MailIdUncheckedCreateWithoutUserInput> | MailIdCreateWithoutUserInput[] | MailIdUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: MailIdCreateOrConnectWithoutUserInput | MailIdCreateOrConnectWithoutUserInput[]
-    upsert?: MailIdUpsertWithWhereUniqueWithoutUserInput | MailIdUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: MailIdCreateManyUserInputEnvelope
-    set?: MailIdWhereUniqueInput | MailIdWhereUniqueInput[]
-    disconnect?: MailIdWhereUniqueInput | MailIdWhereUniqueInput[]
-    delete?: MailIdWhereUniqueInput | MailIdWhereUniqueInput[]
-    connect?: MailIdWhereUniqueInput | MailIdWhereUniqueInput[]
-    update?: MailIdUpdateWithWhereUniqueWithoutUserInput | MailIdUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: MailIdUpdateManyWithWhereWithoutUserInput | MailIdUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: MailIdScalarWhereInput | MailIdScalarWhereInput[]
+  export type MailIdLogUncheckedUpdateManyWithoutUserRefNestedInput = {
+    create?: XOR<MailIdLogCreateWithoutUserRefInput, MailIdLogUncheckedCreateWithoutUserRefInput> | MailIdLogCreateWithoutUserRefInput[] | MailIdLogUncheckedCreateWithoutUserRefInput[]
+    connectOrCreate?: MailIdLogCreateOrConnectWithoutUserRefInput | MailIdLogCreateOrConnectWithoutUserRefInput[]
+    upsert?: MailIdLogUpsertWithWhereUniqueWithoutUserRefInput | MailIdLogUpsertWithWhereUniqueWithoutUserRefInput[]
+    createMany?: MailIdLogCreateManyUserRefInputEnvelope
+    set?: MailIdLogWhereUniqueInput | MailIdLogWhereUniqueInput[]
+    disconnect?: MailIdLogWhereUniqueInput | MailIdLogWhereUniqueInput[]
+    delete?: MailIdLogWhereUniqueInput | MailIdLogWhereUniqueInput[]
+    connect?: MailIdLogWhereUniqueInput | MailIdLogWhereUniqueInput[]
+    update?: MailIdLogUpdateWithWhereUniqueWithoutUserRefInput | MailIdLogUpdateWithWhereUniqueWithoutUserRefInput[]
+    updateMany?: MailIdLogUpdateManyWithWhereWithoutUserRefInput | MailIdLogUpdateManyWithWhereWithoutUserRefInput[]
+    deleteMany?: MailIdLogScalarWhereInput | MailIdLogScalarWhereInput[]
   }
 
   export type ApplicationCreatestatusInput = {
     set: string[]
   }
 
-  export type UserCreateNestedOneWithoutApplicationsInput = {
-    create?: XOR<UserCreateWithoutApplicationsInput, UserUncheckedCreateWithoutApplicationsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutApplicationsInput
+  export type UserCreateNestedOneWithoutApplicationRefsInput = {
+    create?: XOR<UserCreateWithoutApplicationRefsInput, UserUncheckedCreateWithoutApplicationRefsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutApplicationRefsInput
     connect?: UserWhereUniqueInput
+  }
+
+  export type MailIdLogCreateNestedOneWithoutApplicationRefsInput = {
+    create?: XOR<MailIdLogCreateWithoutApplicationRefsInput, MailIdLogUncheckedCreateWithoutApplicationRefsInput>
+    connectOrCreate?: MailIdLogCreateOrConnectWithoutApplicationRefsInput
+    connect?: MailIdLogWhereUniqueInput
   }
 
   export type ApplicationUpdatestatusInput = {
@@ -7076,12 +7196,20 @@ export namespace Prisma {
     push?: string | string[]
   }
 
-  export type UserUpdateOneRequiredWithoutApplicationsNestedInput = {
-    create?: XOR<UserCreateWithoutApplicationsInput, UserUncheckedCreateWithoutApplicationsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutApplicationsInput
-    upsert?: UserUpsertWithoutApplicationsInput
+  export type UserUpdateOneRequiredWithoutApplicationRefsNestedInput = {
+    create?: XOR<UserCreateWithoutApplicationRefsInput, UserUncheckedCreateWithoutApplicationRefsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutApplicationRefsInput
+    upsert?: UserUpsertWithoutApplicationRefsInput
     connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutApplicationsInput, UserUpdateWithoutApplicationsInput>, UserUncheckedUpdateWithoutApplicationsInput>
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutApplicationRefsInput, UserUpdateWithoutApplicationRefsInput>, UserUncheckedUpdateWithoutApplicationRefsInput>
+  }
+
+  export type MailIdLogUpdateOneRequiredWithoutApplicationRefsNestedInput = {
+    create?: XOR<MailIdLogCreateWithoutApplicationRefsInput, MailIdLogUncheckedCreateWithoutApplicationRefsInput>
+    connectOrCreate?: MailIdLogCreateOrConnectWithoutApplicationRefsInput
+    upsert?: MailIdLogUpsertWithoutApplicationRefsInput
+    connect?: MailIdLogWhereUniqueInput
+    update?: XOR<XOR<MailIdLogUpdateToOneWithWhereWithoutApplicationRefsInput, MailIdLogUpdateWithoutApplicationRefsInput>, MailIdLogUncheckedUpdateWithoutApplicationRefsInput>
   }
 
   export type UserCreateNestedOneWithoutUserPreferencesInput = {
@@ -7102,22 +7230,64 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutUserPreferencesInput, UserUpdateWithoutUserPreferencesInput>, UserUncheckedUpdateWithoutUserPreferencesInput>
   }
 
-  export type UserCreateNestedOneWithoutMailIdInput = {
-    create?: XOR<UserCreateWithoutMailIdInput, UserUncheckedCreateWithoutMailIdInput>
-    connectOrCreate?: UserCreateOrConnectWithoutMailIdInput
+  export type UserCreateNestedOneWithoutMailRefsInput = {
+    create?: XOR<UserCreateWithoutMailRefsInput, UserUncheckedCreateWithoutMailRefsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutMailRefsInput
     connect?: UserWhereUniqueInput
+  }
+
+  export type ApplicationCreateNestedManyWithoutMailRefInput = {
+    create?: XOR<ApplicationCreateWithoutMailRefInput, ApplicationUncheckedCreateWithoutMailRefInput> | ApplicationCreateWithoutMailRefInput[] | ApplicationUncheckedCreateWithoutMailRefInput[]
+    connectOrCreate?: ApplicationCreateOrConnectWithoutMailRefInput | ApplicationCreateOrConnectWithoutMailRefInput[]
+    createMany?: ApplicationCreateManyMailRefInputEnvelope
+    connect?: ApplicationWhereUniqueInput | ApplicationWhereUniqueInput[]
+  }
+
+  export type ApplicationUncheckedCreateNestedManyWithoutMailRefInput = {
+    create?: XOR<ApplicationCreateWithoutMailRefInput, ApplicationUncheckedCreateWithoutMailRefInput> | ApplicationCreateWithoutMailRefInput[] | ApplicationUncheckedCreateWithoutMailRefInput[]
+    connectOrCreate?: ApplicationCreateOrConnectWithoutMailRefInput | ApplicationCreateOrConnectWithoutMailRefInput[]
+    createMany?: ApplicationCreateManyMailRefInputEnvelope
+    connect?: ApplicationWhereUniqueInput | ApplicationWhereUniqueInput[]
   }
 
   export type EnumMailStatusFieldUpdateOperationsInput = {
     set?: $Enums.MailStatus
   }
 
-  export type UserUpdateOneRequiredWithoutMailIdNestedInput = {
-    create?: XOR<UserCreateWithoutMailIdInput, UserUncheckedCreateWithoutMailIdInput>
-    connectOrCreate?: UserCreateOrConnectWithoutMailIdInput
-    upsert?: UserUpsertWithoutMailIdInput
+  export type UserUpdateOneRequiredWithoutMailRefsNestedInput = {
+    create?: XOR<UserCreateWithoutMailRefsInput, UserUncheckedCreateWithoutMailRefsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutMailRefsInput
+    upsert?: UserUpsertWithoutMailRefsInput
     connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutMailIdInput, UserUpdateWithoutMailIdInput>, UserUncheckedUpdateWithoutMailIdInput>
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutMailRefsInput, UserUpdateWithoutMailRefsInput>, UserUncheckedUpdateWithoutMailRefsInput>
+  }
+
+  export type ApplicationUpdateManyWithoutMailRefNestedInput = {
+    create?: XOR<ApplicationCreateWithoutMailRefInput, ApplicationUncheckedCreateWithoutMailRefInput> | ApplicationCreateWithoutMailRefInput[] | ApplicationUncheckedCreateWithoutMailRefInput[]
+    connectOrCreate?: ApplicationCreateOrConnectWithoutMailRefInput | ApplicationCreateOrConnectWithoutMailRefInput[]
+    upsert?: ApplicationUpsertWithWhereUniqueWithoutMailRefInput | ApplicationUpsertWithWhereUniqueWithoutMailRefInput[]
+    createMany?: ApplicationCreateManyMailRefInputEnvelope
+    set?: ApplicationWhereUniqueInput | ApplicationWhereUniqueInput[]
+    disconnect?: ApplicationWhereUniqueInput | ApplicationWhereUniqueInput[]
+    delete?: ApplicationWhereUniqueInput | ApplicationWhereUniqueInput[]
+    connect?: ApplicationWhereUniqueInput | ApplicationWhereUniqueInput[]
+    update?: ApplicationUpdateWithWhereUniqueWithoutMailRefInput | ApplicationUpdateWithWhereUniqueWithoutMailRefInput[]
+    updateMany?: ApplicationUpdateManyWithWhereWithoutMailRefInput | ApplicationUpdateManyWithWhereWithoutMailRefInput[]
+    deleteMany?: ApplicationScalarWhereInput | ApplicationScalarWhereInput[]
+  }
+
+  export type ApplicationUncheckedUpdateManyWithoutMailRefNestedInput = {
+    create?: XOR<ApplicationCreateWithoutMailRefInput, ApplicationUncheckedCreateWithoutMailRefInput> | ApplicationCreateWithoutMailRefInput[] | ApplicationUncheckedCreateWithoutMailRefInput[]
+    connectOrCreate?: ApplicationCreateOrConnectWithoutMailRefInput | ApplicationCreateOrConnectWithoutMailRefInput[]
+    upsert?: ApplicationUpsertWithWhereUniqueWithoutMailRefInput | ApplicationUpsertWithWhereUniqueWithoutMailRefInput[]
+    createMany?: ApplicationCreateManyMailRefInputEnvelope
+    set?: ApplicationWhereUniqueInput | ApplicationWhereUniqueInput[]
+    disconnect?: ApplicationWhereUniqueInput | ApplicationWhereUniqueInput[]
+    delete?: ApplicationWhereUniqueInput | ApplicationWhereUniqueInput[]
+    connect?: ApplicationWhereUniqueInput | ApplicationWhereUniqueInput[]
+    update?: ApplicationUpdateWithWhereUniqueWithoutMailRefInput | ApplicationUpdateWithWhereUniqueWithoutMailRefInput[]
+    updateMany?: ApplicationUpdateManyWithWhereWithoutMailRefInput | ApplicationUpdateManyWithWhereWithoutMailRefInput[]
+    deleteMany?: ApplicationScalarWhereInput | ApplicationScalarWhereInput[]
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -7286,7 +7456,7 @@ export namespace Prisma {
     _max?: NestedEnumMailStatusFilter<$PrismaModel>
   }
 
-  export type ApplicationCreateWithoutUserInput = {
+  export type ApplicationCreateWithoutUserRefInput = {
     id?: string
     jobTitle: string
     company: string
@@ -7299,9 +7469,10 @@ export namespace Prisma {
     appliedAt: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    mailRef: MailIdLogCreateNestedOneWithoutApplicationRefsInput
   }
 
-  export type ApplicationUncheckedCreateWithoutUserInput = {
+  export type ApplicationUncheckedCreateWithoutUserRefInput = {
     id?: string
     jobTitle: string
     company: string
@@ -7314,19 +7485,20 @@ export namespace Prisma {
     appliedAt: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    mailRefId: string
   }
 
-  export type ApplicationCreateOrConnectWithoutUserInput = {
+  export type ApplicationCreateOrConnectWithoutUserRefInput = {
     where: ApplicationWhereUniqueInput
-    create: XOR<ApplicationCreateWithoutUserInput, ApplicationUncheckedCreateWithoutUserInput>
+    create: XOR<ApplicationCreateWithoutUserRefInput, ApplicationUncheckedCreateWithoutUserRefInput>
   }
 
-  export type ApplicationCreateManyUserInputEnvelope = {
-    data: ApplicationCreateManyUserInput | ApplicationCreateManyUserInput[]
+  export type ApplicationCreateManyUserRefInputEnvelope = {
+    data: ApplicationCreateManyUserRefInput | ApplicationCreateManyUserRefInput[]
     skipDuplicates?: boolean
   }
 
-  export type UserPreferencesCreateWithoutUserInput = {
+  export type UserPreferencesCreateWithoutUserRefInput = {
     id?: string
     syncFrequency?: number
     emailNotifications?: boolean
@@ -7335,7 +7507,7 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type UserPreferencesUncheckedCreateWithoutUserInput = {
+  export type UserPreferencesUncheckedCreateWithoutUserRefInput = {
     id?: string
     syncFrequency?: number
     emailNotifications?: boolean
@@ -7344,53 +7516,55 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type UserPreferencesCreateOrConnectWithoutUserInput = {
+  export type UserPreferencesCreateOrConnectWithoutUserRefInput = {
     where: UserPreferencesWhereUniqueInput
-    create: XOR<UserPreferencesCreateWithoutUserInput, UserPreferencesUncheckedCreateWithoutUserInput>
+    create: XOR<UserPreferencesCreateWithoutUserRefInput, UserPreferencesUncheckedCreateWithoutUserRefInput>
   }
 
-  export type MailIdCreateWithoutUserInput = {
+  export type MailIdLogCreateWithoutUserRefInput = {
     id?: string
     mailId: string
     threadId: string
     status?: $Enums.MailStatus
     createdAt?: Date | string
     updatedAt?: Date | string
+    applicationRefs?: ApplicationCreateNestedManyWithoutMailRefInput
   }
 
-  export type MailIdUncheckedCreateWithoutUserInput = {
+  export type MailIdLogUncheckedCreateWithoutUserRefInput = {
     id?: string
     mailId: string
     threadId: string
     status?: $Enums.MailStatus
     createdAt?: Date | string
     updatedAt?: Date | string
+    applicationRefs?: ApplicationUncheckedCreateNestedManyWithoutMailRefInput
   }
 
-  export type MailIdCreateOrConnectWithoutUserInput = {
-    where: MailIdWhereUniqueInput
-    create: XOR<MailIdCreateWithoutUserInput, MailIdUncheckedCreateWithoutUserInput>
+  export type MailIdLogCreateOrConnectWithoutUserRefInput = {
+    where: MailIdLogWhereUniqueInput
+    create: XOR<MailIdLogCreateWithoutUserRefInput, MailIdLogUncheckedCreateWithoutUserRefInput>
   }
 
-  export type MailIdCreateManyUserInputEnvelope = {
-    data: MailIdCreateManyUserInput | MailIdCreateManyUserInput[]
+  export type MailIdLogCreateManyUserRefInputEnvelope = {
+    data: MailIdLogCreateManyUserRefInput | MailIdLogCreateManyUserRefInput[]
     skipDuplicates?: boolean
   }
 
-  export type ApplicationUpsertWithWhereUniqueWithoutUserInput = {
+  export type ApplicationUpsertWithWhereUniqueWithoutUserRefInput = {
     where: ApplicationWhereUniqueInput
-    update: XOR<ApplicationUpdateWithoutUserInput, ApplicationUncheckedUpdateWithoutUserInput>
-    create: XOR<ApplicationCreateWithoutUserInput, ApplicationUncheckedCreateWithoutUserInput>
+    update: XOR<ApplicationUpdateWithoutUserRefInput, ApplicationUncheckedUpdateWithoutUserRefInput>
+    create: XOR<ApplicationCreateWithoutUserRefInput, ApplicationUncheckedCreateWithoutUserRefInput>
   }
 
-  export type ApplicationUpdateWithWhereUniqueWithoutUserInput = {
+  export type ApplicationUpdateWithWhereUniqueWithoutUserRefInput = {
     where: ApplicationWhereUniqueInput
-    data: XOR<ApplicationUpdateWithoutUserInput, ApplicationUncheckedUpdateWithoutUserInput>
+    data: XOR<ApplicationUpdateWithoutUserRefInput, ApplicationUncheckedUpdateWithoutUserRefInput>
   }
 
-  export type ApplicationUpdateManyWithWhereWithoutUserInput = {
+  export type ApplicationUpdateManyWithWhereWithoutUserRefInput = {
     where: ApplicationScalarWhereInput
-    data: XOR<ApplicationUpdateManyMutationInput, ApplicationUncheckedUpdateManyWithoutUserInput>
+    data: XOR<ApplicationUpdateManyMutationInput, ApplicationUncheckedUpdateManyWithoutUserRefInput>
   }
 
   export type ApplicationScalarWhereInput = {
@@ -7398,7 +7572,7 @@ export namespace Prisma {
     OR?: ApplicationScalarWhereInput[]
     NOT?: ApplicationScalarWhereInput | ApplicationScalarWhereInput[]
     id?: StringFilter<"Application"> | string
-    userId?: StringFilter<"Application"> | string
+    userRefId?: StringFilter<"Application"> | string
     jobTitle?: StringFilter<"Application"> | string
     company?: StringFilter<"Application"> | string
     jobId?: StringNullableFilter<"Application"> | string | null
@@ -7410,20 +7584,21 @@ export namespace Prisma {
     appliedAt?: DateTimeFilter<"Application"> | Date | string
     createdAt?: DateTimeFilter<"Application"> | Date | string
     updatedAt?: DateTimeFilter<"Application"> | Date | string
+    mailRefId?: StringFilter<"Application"> | string
   }
 
-  export type UserPreferencesUpsertWithoutUserInput = {
-    update: XOR<UserPreferencesUpdateWithoutUserInput, UserPreferencesUncheckedUpdateWithoutUserInput>
-    create: XOR<UserPreferencesCreateWithoutUserInput, UserPreferencesUncheckedCreateWithoutUserInput>
+  export type UserPreferencesUpsertWithoutUserRefInput = {
+    update: XOR<UserPreferencesUpdateWithoutUserRefInput, UserPreferencesUncheckedUpdateWithoutUserRefInput>
+    create: XOR<UserPreferencesCreateWithoutUserRefInput, UserPreferencesUncheckedCreateWithoutUserRefInput>
     where?: UserPreferencesWhereInput
   }
 
-  export type UserPreferencesUpdateToOneWithWhereWithoutUserInput = {
+  export type UserPreferencesUpdateToOneWithWhereWithoutUserRefInput = {
     where?: UserPreferencesWhereInput
-    data: XOR<UserPreferencesUpdateWithoutUserInput, UserPreferencesUncheckedUpdateWithoutUserInput>
+    data: XOR<UserPreferencesUpdateWithoutUserRefInput, UserPreferencesUncheckedUpdateWithoutUserRefInput>
   }
 
-  export type UserPreferencesUpdateWithoutUserInput = {
+  export type UserPreferencesUpdateWithoutUserRefInput = {
     id?: StringFieldUpdateOperationsInput | string
     syncFrequency?: IntFieldUpdateOperationsInput | number
     emailNotifications?: BoolFieldUpdateOperationsInput | boolean
@@ -7432,7 +7607,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type UserPreferencesUncheckedUpdateWithoutUserInput = {
+  export type UserPreferencesUncheckedUpdateWithoutUserRefInput = {
     id?: StringFieldUpdateOperationsInput | string
     syncFrequency?: IntFieldUpdateOperationsInput | number
     emailNotifications?: BoolFieldUpdateOperationsInput | boolean
@@ -7441,36 +7616,36 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type MailIdUpsertWithWhereUniqueWithoutUserInput = {
-    where: MailIdWhereUniqueInput
-    update: XOR<MailIdUpdateWithoutUserInput, MailIdUncheckedUpdateWithoutUserInput>
-    create: XOR<MailIdCreateWithoutUserInput, MailIdUncheckedCreateWithoutUserInput>
+  export type MailIdLogUpsertWithWhereUniqueWithoutUserRefInput = {
+    where: MailIdLogWhereUniqueInput
+    update: XOR<MailIdLogUpdateWithoutUserRefInput, MailIdLogUncheckedUpdateWithoutUserRefInput>
+    create: XOR<MailIdLogCreateWithoutUserRefInput, MailIdLogUncheckedCreateWithoutUserRefInput>
   }
 
-  export type MailIdUpdateWithWhereUniqueWithoutUserInput = {
-    where: MailIdWhereUniqueInput
-    data: XOR<MailIdUpdateWithoutUserInput, MailIdUncheckedUpdateWithoutUserInput>
+  export type MailIdLogUpdateWithWhereUniqueWithoutUserRefInput = {
+    where: MailIdLogWhereUniqueInput
+    data: XOR<MailIdLogUpdateWithoutUserRefInput, MailIdLogUncheckedUpdateWithoutUserRefInput>
   }
 
-  export type MailIdUpdateManyWithWhereWithoutUserInput = {
-    where: MailIdScalarWhereInput
-    data: XOR<MailIdUpdateManyMutationInput, MailIdUncheckedUpdateManyWithoutUserInput>
+  export type MailIdLogUpdateManyWithWhereWithoutUserRefInput = {
+    where: MailIdLogScalarWhereInput
+    data: XOR<MailIdLogUpdateManyMutationInput, MailIdLogUncheckedUpdateManyWithoutUserRefInput>
   }
 
-  export type MailIdScalarWhereInput = {
-    AND?: MailIdScalarWhereInput | MailIdScalarWhereInput[]
-    OR?: MailIdScalarWhereInput[]
-    NOT?: MailIdScalarWhereInput | MailIdScalarWhereInput[]
-    id?: StringFilter<"MailId"> | string
-    mailId?: StringFilter<"MailId"> | string
-    threadId?: StringFilter<"MailId"> | string
-    status?: EnumMailStatusFilter<"MailId"> | $Enums.MailStatus
-    userId?: StringFilter<"MailId"> | string
-    createdAt?: DateTimeFilter<"MailId"> | Date | string
-    updatedAt?: DateTimeFilter<"MailId"> | Date | string
+  export type MailIdLogScalarWhereInput = {
+    AND?: MailIdLogScalarWhereInput | MailIdLogScalarWhereInput[]
+    OR?: MailIdLogScalarWhereInput[]
+    NOT?: MailIdLogScalarWhereInput | MailIdLogScalarWhereInput[]
+    id?: StringFilter<"MailIdLog"> | string
+    mailId?: StringFilter<"MailIdLog"> | string
+    threadId?: StringFilter<"MailIdLog"> | string
+    status?: EnumMailStatusFilter<"MailIdLog"> | $Enums.MailStatus
+    userRefId?: StringFilter<"MailIdLog"> | string
+    createdAt?: DateTimeFilter<"MailIdLog"> | Date | string
+    updatedAt?: DateTimeFilter<"MailIdLog"> | Date | string
   }
 
-  export type UserCreateWithoutApplicationsInput = {
+  export type UserCreateWithoutApplicationRefsInput = {
     id?: string
     clerkUserId: string
     email: string
@@ -7479,11 +7654,11 @@ export namespace Prisma {
     credits?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    UserPreferences?: UserPreferencesCreateNestedOneWithoutUserInput
-    MailId?: MailIdCreateNestedManyWithoutUserInput
+    UserPreferences?: UserPreferencesCreateNestedOneWithoutUserRefInput
+    mailRefs?: MailIdLogCreateNestedManyWithoutUserRefInput
   }
 
-  export type UserUncheckedCreateWithoutApplicationsInput = {
+  export type UserUncheckedCreateWithoutApplicationRefsInput = {
     id?: string
     clerkUserId: string
     email: string
@@ -7492,27 +7667,52 @@ export namespace Prisma {
     credits?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    UserPreferences?: UserPreferencesUncheckedCreateNestedOneWithoutUserInput
-    MailId?: MailIdUncheckedCreateNestedManyWithoutUserInput
+    UserPreferences?: UserPreferencesUncheckedCreateNestedOneWithoutUserRefInput
+    mailRefs?: MailIdLogUncheckedCreateNestedManyWithoutUserRefInput
   }
 
-  export type UserCreateOrConnectWithoutApplicationsInput = {
+  export type UserCreateOrConnectWithoutApplicationRefsInput = {
     where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutApplicationsInput, UserUncheckedCreateWithoutApplicationsInput>
+    create: XOR<UserCreateWithoutApplicationRefsInput, UserUncheckedCreateWithoutApplicationRefsInput>
   }
 
-  export type UserUpsertWithoutApplicationsInput = {
-    update: XOR<UserUpdateWithoutApplicationsInput, UserUncheckedUpdateWithoutApplicationsInput>
-    create: XOR<UserCreateWithoutApplicationsInput, UserUncheckedCreateWithoutApplicationsInput>
+  export type MailIdLogCreateWithoutApplicationRefsInput = {
+    id?: string
+    mailId: string
+    threadId: string
+    status?: $Enums.MailStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRef: UserCreateNestedOneWithoutMailRefsInput
+  }
+
+  export type MailIdLogUncheckedCreateWithoutApplicationRefsInput = {
+    id?: string
+    mailId: string
+    threadId: string
+    status?: $Enums.MailStatus
+    userRefId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MailIdLogCreateOrConnectWithoutApplicationRefsInput = {
+    where: MailIdLogWhereUniqueInput
+    create: XOR<MailIdLogCreateWithoutApplicationRefsInput, MailIdLogUncheckedCreateWithoutApplicationRefsInput>
+  }
+
+  export type UserUpsertWithoutApplicationRefsInput = {
+    update: XOR<UserUpdateWithoutApplicationRefsInput, UserUncheckedUpdateWithoutApplicationRefsInput>
+    create: XOR<UserCreateWithoutApplicationRefsInput, UserUncheckedCreateWithoutApplicationRefsInput>
     where?: UserWhereInput
   }
 
-  export type UserUpdateToOneWithWhereWithoutApplicationsInput = {
+  export type UserUpdateToOneWithWhereWithoutApplicationRefsInput = {
     where?: UserWhereInput
-    data: XOR<UserUpdateWithoutApplicationsInput, UserUncheckedUpdateWithoutApplicationsInput>
+    data: XOR<UserUpdateWithoutApplicationRefsInput, UserUncheckedUpdateWithoutApplicationRefsInput>
   }
 
-  export type UserUpdateWithoutApplicationsInput = {
+  export type UserUpdateWithoutApplicationRefsInput = {
     id?: StringFieldUpdateOperationsInput | string
     clerkUserId?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
@@ -7521,11 +7721,11 @@ export namespace Prisma {
     credits?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    UserPreferences?: UserPreferencesUpdateOneWithoutUserNestedInput
-    MailId?: MailIdUpdateManyWithoutUserNestedInput
+    UserPreferences?: UserPreferencesUpdateOneWithoutUserRefNestedInput
+    mailRefs?: MailIdLogUpdateManyWithoutUserRefNestedInput
   }
 
-  export type UserUncheckedUpdateWithoutApplicationsInput = {
+  export type UserUncheckedUpdateWithoutApplicationRefsInput = {
     id?: StringFieldUpdateOperationsInput | string
     clerkUserId?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
@@ -7534,8 +7734,39 @@ export namespace Prisma {
     credits?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    UserPreferences?: UserPreferencesUncheckedUpdateOneWithoutUserNestedInput
-    MailId?: MailIdUncheckedUpdateManyWithoutUserNestedInput
+    UserPreferences?: UserPreferencesUncheckedUpdateOneWithoutUserRefNestedInput
+    mailRefs?: MailIdLogUncheckedUpdateManyWithoutUserRefNestedInput
+  }
+
+  export type MailIdLogUpsertWithoutApplicationRefsInput = {
+    update: XOR<MailIdLogUpdateWithoutApplicationRefsInput, MailIdLogUncheckedUpdateWithoutApplicationRefsInput>
+    create: XOR<MailIdLogCreateWithoutApplicationRefsInput, MailIdLogUncheckedCreateWithoutApplicationRefsInput>
+    where?: MailIdLogWhereInput
+  }
+
+  export type MailIdLogUpdateToOneWithWhereWithoutApplicationRefsInput = {
+    where?: MailIdLogWhereInput
+    data: XOR<MailIdLogUpdateWithoutApplicationRefsInput, MailIdLogUncheckedUpdateWithoutApplicationRefsInput>
+  }
+
+  export type MailIdLogUpdateWithoutApplicationRefsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    mailId?: StringFieldUpdateOperationsInput | string
+    threadId?: StringFieldUpdateOperationsInput | string
+    status?: EnumMailStatusFieldUpdateOperationsInput | $Enums.MailStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRef?: UserUpdateOneRequiredWithoutMailRefsNestedInput
+  }
+
+  export type MailIdLogUncheckedUpdateWithoutApplicationRefsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    mailId?: StringFieldUpdateOperationsInput | string
+    threadId?: StringFieldUpdateOperationsInput | string
+    status?: EnumMailStatusFieldUpdateOperationsInput | $Enums.MailStatus
+    userRefId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserCreateWithoutUserPreferencesInput = {
@@ -7547,8 +7778,8 @@ export namespace Prisma {
     credits?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    applications?: ApplicationCreateNestedManyWithoutUserInput
-    MailId?: MailIdCreateNestedManyWithoutUserInput
+    applicationRefs?: ApplicationCreateNestedManyWithoutUserRefInput
+    mailRefs?: MailIdLogCreateNestedManyWithoutUserRefInput
   }
 
   export type UserUncheckedCreateWithoutUserPreferencesInput = {
@@ -7560,8 +7791,8 @@ export namespace Prisma {
     credits?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    applications?: ApplicationUncheckedCreateNestedManyWithoutUserInput
-    MailId?: MailIdUncheckedCreateNestedManyWithoutUserInput
+    applicationRefs?: ApplicationUncheckedCreateNestedManyWithoutUserRefInput
+    mailRefs?: MailIdLogUncheckedCreateNestedManyWithoutUserRefInput
   }
 
   export type UserCreateOrConnectWithoutUserPreferencesInput = {
@@ -7589,8 +7820,8 @@ export namespace Prisma {
     credits?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    applications?: ApplicationUpdateManyWithoutUserNestedInput
-    MailId?: MailIdUpdateManyWithoutUserNestedInput
+    applicationRefs?: ApplicationUpdateManyWithoutUserRefNestedInput
+    mailRefs?: MailIdLogUpdateManyWithoutUserRefNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUserPreferencesInput = {
@@ -7602,11 +7833,11 @@ export namespace Prisma {
     credits?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    applications?: ApplicationUncheckedUpdateManyWithoutUserNestedInput
-    MailId?: MailIdUncheckedUpdateManyWithoutUserNestedInput
+    applicationRefs?: ApplicationUncheckedUpdateManyWithoutUserRefNestedInput
+    mailRefs?: MailIdLogUncheckedUpdateManyWithoutUserRefNestedInput
   }
 
-  export type UserCreateWithoutMailIdInput = {
+  export type UserCreateWithoutMailRefsInput = {
     id?: string
     clerkUserId: string
     email: string
@@ -7615,11 +7846,11 @@ export namespace Prisma {
     credits?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    applications?: ApplicationCreateNestedManyWithoutUserInput
-    UserPreferences?: UserPreferencesCreateNestedOneWithoutUserInput
+    applicationRefs?: ApplicationCreateNestedManyWithoutUserRefInput
+    UserPreferences?: UserPreferencesCreateNestedOneWithoutUserRefInput
   }
 
-  export type UserUncheckedCreateWithoutMailIdInput = {
+  export type UserUncheckedCreateWithoutMailRefsInput = {
     id?: string
     clerkUserId: string
     email: string
@@ -7628,54 +7859,34 @@ export namespace Prisma {
     credits?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    applications?: ApplicationUncheckedCreateNestedManyWithoutUserInput
-    UserPreferences?: UserPreferencesUncheckedCreateNestedOneWithoutUserInput
+    applicationRefs?: ApplicationUncheckedCreateNestedManyWithoutUserRefInput
+    UserPreferences?: UserPreferencesUncheckedCreateNestedOneWithoutUserRefInput
   }
 
-  export type UserCreateOrConnectWithoutMailIdInput = {
+  export type UserCreateOrConnectWithoutMailRefsInput = {
     where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutMailIdInput, UserUncheckedCreateWithoutMailIdInput>
+    create: XOR<UserCreateWithoutMailRefsInput, UserUncheckedCreateWithoutMailRefsInput>
   }
 
-  export type UserUpsertWithoutMailIdInput = {
-    update: XOR<UserUpdateWithoutMailIdInput, UserUncheckedUpdateWithoutMailIdInput>
-    create: XOR<UserCreateWithoutMailIdInput, UserUncheckedCreateWithoutMailIdInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutMailIdInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutMailIdInput, UserUncheckedUpdateWithoutMailIdInput>
-  }
-
-  export type UserUpdateWithoutMailIdInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    clerkUserId?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    credits?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    applications?: ApplicationUpdateManyWithoutUserNestedInput
-    UserPreferences?: UserPreferencesUpdateOneWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutMailIdInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    clerkUserId?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    credits?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    applications?: ApplicationUncheckedUpdateManyWithoutUserNestedInput
-    UserPreferences?: UserPreferencesUncheckedUpdateOneWithoutUserNestedInput
-  }
-
-  export type ApplicationCreateManyUserInput = {
+  export type ApplicationCreateWithoutMailRefInput = {
     id?: string
+    jobTitle: string
+    company: string
+    jobId?: string | null
+    platform: string
+    location?: string | null
+    status?: ApplicationCreatestatusInput | string[]
+    notes?: string | null
+    jobType: string
+    appliedAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRef: UserCreateNestedOneWithoutApplicationRefsInput
+  }
+
+  export type ApplicationUncheckedCreateWithoutMailRefInput = {
+    id?: string
+    userRefId: string
     jobTitle: string
     company: string
     jobId?: string | null
@@ -7689,7 +7900,86 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type MailIdCreateManyUserInput = {
+  export type ApplicationCreateOrConnectWithoutMailRefInput = {
+    where: ApplicationWhereUniqueInput
+    create: XOR<ApplicationCreateWithoutMailRefInput, ApplicationUncheckedCreateWithoutMailRefInput>
+  }
+
+  export type ApplicationCreateManyMailRefInputEnvelope = {
+    data: ApplicationCreateManyMailRefInput | ApplicationCreateManyMailRefInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserUpsertWithoutMailRefsInput = {
+    update: XOR<UserUpdateWithoutMailRefsInput, UserUncheckedUpdateWithoutMailRefsInput>
+    create: XOR<UserCreateWithoutMailRefsInput, UserUncheckedCreateWithoutMailRefsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutMailRefsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutMailRefsInput, UserUncheckedUpdateWithoutMailRefsInput>
+  }
+
+  export type UserUpdateWithoutMailRefsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clerkUserId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    credits?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    applicationRefs?: ApplicationUpdateManyWithoutUserRefNestedInput
+    UserPreferences?: UserPreferencesUpdateOneWithoutUserRefNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutMailRefsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clerkUserId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    credits?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    applicationRefs?: ApplicationUncheckedUpdateManyWithoutUserRefNestedInput
+    UserPreferences?: UserPreferencesUncheckedUpdateOneWithoutUserRefNestedInput
+  }
+
+  export type ApplicationUpsertWithWhereUniqueWithoutMailRefInput = {
+    where: ApplicationWhereUniqueInput
+    update: XOR<ApplicationUpdateWithoutMailRefInput, ApplicationUncheckedUpdateWithoutMailRefInput>
+    create: XOR<ApplicationCreateWithoutMailRefInput, ApplicationUncheckedCreateWithoutMailRefInput>
+  }
+
+  export type ApplicationUpdateWithWhereUniqueWithoutMailRefInput = {
+    where: ApplicationWhereUniqueInput
+    data: XOR<ApplicationUpdateWithoutMailRefInput, ApplicationUncheckedUpdateWithoutMailRefInput>
+  }
+
+  export type ApplicationUpdateManyWithWhereWithoutMailRefInput = {
+    where: ApplicationScalarWhereInput
+    data: XOR<ApplicationUpdateManyMutationInput, ApplicationUncheckedUpdateManyWithoutMailRefInput>
+  }
+
+  export type ApplicationCreateManyUserRefInput = {
+    id?: string
+    jobTitle: string
+    company: string
+    jobId?: string | null
+    platform: string
+    location?: string | null
+    status?: ApplicationCreatestatusInput | string[]
+    notes?: string | null
+    jobType: string
+    appliedAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    mailRefId: string
+  }
+
+  export type MailIdLogCreateManyUserRefInput = {
     id?: string
     mailId: string
     threadId: string
@@ -7698,8 +7988,118 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type ApplicationUpdateWithoutUserInput = {
+  export type ApplicationUpdateWithoutUserRefInput = {
     id?: StringFieldUpdateOperationsInput | string
+    jobTitle?: StringFieldUpdateOperationsInput | string
+    company?: StringFieldUpdateOperationsInput | string
+    jobId?: NullableStringFieldUpdateOperationsInput | string | null
+    platform?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: ApplicationUpdatestatusInput | string[]
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    jobType?: StringFieldUpdateOperationsInput | string
+    appliedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    mailRef?: MailIdLogUpdateOneRequiredWithoutApplicationRefsNestedInput
+  }
+
+  export type ApplicationUncheckedUpdateWithoutUserRefInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    jobTitle?: StringFieldUpdateOperationsInput | string
+    company?: StringFieldUpdateOperationsInput | string
+    jobId?: NullableStringFieldUpdateOperationsInput | string | null
+    platform?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: ApplicationUpdatestatusInput | string[]
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    jobType?: StringFieldUpdateOperationsInput | string
+    appliedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    mailRefId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ApplicationUncheckedUpdateManyWithoutUserRefInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    jobTitle?: StringFieldUpdateOperationsInput | string
+    company?: StringFieldUpdateOperationsInput | string
+    jobId?: NullableStringFieldUpdateOperationsInput | string | null
+    platform?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: ApplicationUpdatestatusInput | string[]
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    jobType?: StringFieldUpdateOperationsInput | string
+    appliedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    mailRefId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type MailIdLogUpdateWithoutUserRefInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    mailId?: StringFieldUpdateOperationsInput | string
+    threadId?: StringFieldUpdateOperationsInput | string
+    status?: EnumMailStatusFieldUpdateOperationsInput | $Enums.MailStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    applicationRefs?: ApplicationUpdateManyWithoutMailRefNestedInput
+  }
+
+  export type MailIdLogUncheckedUpdateWithoutUserRefInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    mailId?: StringFieldUpdateOperationsInput | string
+    threadId?: StringFieldUpdateOperationsInput | string
+    status?: EnumMailStatusFieldUpdateOperationsInput | $Enums.MailStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    applicationRefs?: ApplicationUncheckedUpdateManyWithoutMailRefNestedInput
+  }
+
+  export type MailIdLogUncheckedUpdateManyWithoutUserRefInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    mailId?: StringFieldUpdateOperationsInput | string
+    threadId?: StringFieldUpdateOperationsInput | string
+    status?: EnumMailStatusFieldUpdateOperationsInput | $Enums.MailStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ApplicationCreateManyMailRefInput = {
+    id?: string
+    userRefId: string
+    jobTitle: string
+    company: string
+    jobId?: string | null
+    platform: string
+    location?: string | null
+    status?: ApplicationCreatestatusInput | string[]
+    notes?: string | null
+    jobType: string
+    appliedAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ApplicationUpdateWithoutMailRefInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    jobTitle?: StringFieldUpdateOperationsInput | string
+    company?: StringFieldUpdateOperationsInput | string
+    jobId?: NullableStringFieldUpdateOperationsInput | string | null
+    platform?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: ApplicationUpdatestatusInput | string[]
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    jobType?: StringFieldUpdateOperationsInput | string
+    appliedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRef?: UserUpdateOneRequiredWithoutApplicationRefsNestedInput
+  }
+
+  export type ApplicationUncheckedUpdateWithoutMailRefInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userRefId?: StringFieldUpdateOperationsInput | string
     jobTitle?: StringFieldUpdateOperationsInput | string
     company?: StringFieldUpdateOperationsInput | string
     jobId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7713,8 +8113,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type ApplicationUncheckedUpdateWithoutUserInput = {
+  export type ApplicationUncheckedUpdateManyWithoutMailRefInput = {
     id?: StringFieldUpdateOperationsInput | string
+    userRefId?: StringFieldUpdateOperationsInput | string
     jobTitle?: StringFieldUpdateOperationsInput | string
     company?: StringFieldUpdateOperationsInput | string
     jobId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7724,48 +8125,6 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     jobType?: StringFieldUpdateOperationsInput | string
     appliedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ApplicationUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    jobTitle?: StringFieldUpdateOperationsInput | string
-    company?: StringFieldUpdateOperationsInput | string
-    jobId?: NullableStringFieldUpdateOperationsInput | string | null
-    platform?: StringFieldUpdateOperationsInput | string
-    location?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: ApplicationUpdatestatusInput | string[]
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    jobType?: StringFieldUpdateOperationsInput | string
-    appliedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type MailIdUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    mailId?: StringFieldUpdateOperationsInput | string
-    threadId?: StringFieldUpdateOperationsInput | string
-    status?: EnumMailStatusFieldUpdateOperationsInput | $Enums.MailStatus
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type MailIdUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    mailId?: StringFieldUpdateOperationsInput | string
-    threadId?: StringFieldUpdateOperationsInput | string
-    status?: EnumMailStatusFieldUpdateOperationsInput | $Enums.MailStatus
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type MailIdUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    mailId?: StringFieldUpdateOperationsInput | string
-    threadId?: StringFieldUpdateOperationsInput | string
-    status?: EnumMailStatusFieldUpdateOperationsInput | $Enums.MailStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

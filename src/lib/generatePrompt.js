@@ -61,85 +61,76 @@
 // };
 
 
-export const generatePrompt = (emailContent) => {
-    return `
-  You are an intelligent assistant trained to analyze job-related emails and return structured JSON output. You must classify the email as one of the following types: "job", "non_job", or "unable_to_analyze". Do not respond with anything outside the expected JSON format.
-  
-  ---
-  
-  ## ✅ Classification Rules:
-  
-  1. **"job"**
-     - Email is a direct response to a job the user applied for.
-     - Examples: interview invitations, shortlisting emails, selection/rejection, offer letters, etc.
-  
-  2. **"non_job"**
-     - Email contains job alerts, platform notifications, promotions, or general newsletters.
-     - Not tied to a specific application made by the user.
-  
-  3. **"unable_to_analyze"**
-     - Email content is too vague, lacks information, or cannot be confidently classified into "job" or "non_job".
-  
-  ❗️ If you're unsure or the email is too ambiguous, you MUST return:
-  \`\`\`json
-  { "type": "unable_to_analyze" }
-  \`\`\`
-  
-  ---
-  
-  ## 🧠 For "job" type, extract the following details:
-  - \`jobTitle\`: e.g., "Backend Developer Intern"
-  - \`company\`: e.g., "Google"
-  - \`platform\`: e.g., "LinkedIn", "Naukri"
-  - \`location\`: e.g., "Remote", "Hyderabad", or leave blank if not mentioned
-  - \`jobType\`: e.g., "Internship", "Full-time"
-  - \`appliedAt\`: the date the user applied (if available or inferable)
-  - \`status\`: a list of one or more status updates from the email (e.g., ["Interview scheduled", "Shortlisted"])
-  
-  ---
-  
-  ## 📦 Output Format
-  
-  Return **only one** of the following JSON responses:
-  
-  ### 1. For Job-Related Email:
-  \`\`\`json
-  {
-    "type": "job",
-    "jobTitle": "",
-    "company": "",
-    "platform": "",
-    "location": "",
-    "jobType": "",
-    "appliedAt": "",
-    "status": [""]
-  }
-  \`\`\`
-  
-  ### 2. For Non-Job Email:
-  \`\`\`json
-  {
-    "type": "non_job"
-  }
-  \`\`\`
-  
-  ### 3. For Unclear/Ambiguous Email:
-  \`\`\`json
-  {
-    "type": "unable_to_analyze"
-  }
-  \`\`\`
-  
-  ---
-  
-  ⚠️ Important:
-  - Do not include any explanation or notes — return the JSON only.
-  - If the classification cannot be confidently determined, return \`{ "type": "unable_to_analyze" }\` without hesitation.
-  
-  ---
-  
-  ## 📩 Email Content:
-  
-  ${emailContent}
-  `;
+export const generatePrompt = (emailBody, emailSnippet, emailSubject, receivedDate) => {
+  return `
+You are a highly intelligent assistant trained to analyze job-related emails and output structured JSON data. Only respond with JSON — no explanation or extra commentary.
+
+---
+
+## 🔍 Your task is to:
+1. Classify the email into:
+   - **"job"**: Related to a job/internship the user applied to or registered for.
+   - **"non_job"**: General job alerts, newsletters, updates, or promotions.
+   - **"unable_to_analyze"**: Vague or incomplete information.
+
+2. If classified as **"job"**, intelligently extract these fields using context and common sense:
+
+| Field        | Description |
+|--------------|-------------|
+| \`jobTitle\`  | If not directly mentioned, infer from phrases like "Open Campus Recruitment", "Hiring Drive", etc. You can use that phrase as a fallback. |
+| \`company\`   | Look for the sender or any company mention in body. |
+| \`platform\`  | Detect platforms like LinkedIn, Naukri, Superset, HackerEarth, HirePro, etc. Even if casually mentioned. |
+| \`location\`  | Use if mentioned, else return "". |
+| \`jobType\`   | Use hints to infer: if "intern", "summer", "campus" → "Internship", else → "Full-time". |
+| \`appliedAt\` | Extract a date or approximate month if stated (e.g., "registered on March 24"). If not explicitly mentioned but registration is confirmed, you may assume the date the email was received: **"${receivedDate}"**. |
+| \`status\`    | A **single most relevant status** like "Registered", "Shortlisted", "Interview Scheduled", "Selected", or "Rejected" — based on this specific email only. |
+
+---
+
+## 🧠 Use Common Sense Rules:
+- "Campus Recruitment", "Hiring Drive" → likely "Full-time" unless "intern" or "summer" is mentioned.
+- "Summer Internship", "Intern Opportunity" → "Internship".
+- If job title isn’t stated but event/role is described, use that as title.
+- Only infer one status from the email — the one **most clearly represented** in the email's content.
+- Avoid mixing multiple stages (e.g., don’t return ["Registered", "Shortlisted"] unless explicitly stated in the same email).
+
+---
+
+## 📨 Email Details:
+### 📌 Subject:
+${emailSubject}
+
+### ✂️ Snippet:
+${emailSnippet}
+
+### 📝 Body:
+${emailBody}
+
+---
+## 📦 Return ONLY a JSON block in one of the following formats:
+
+### ✅ Job Email:
+\`\`\`json
+{
+  "type": "job",
+  "jobTitle": "",
+  "company": "",
+  "platform": "",
+  "location": "",
+  "jobType": "",
+  "appliedAt": "",
+  "status": ""
+}
+\`\`\`
+
+### 🚫 Non-Job Email:
+\`\`\`json
+{ "type": "non_job" }
+\`\`\`
+
+### ❓ Unclear:
+\`\`\`json
+{ "type": "unable_to_analyze" }
+\`\`\`
+`;
 };

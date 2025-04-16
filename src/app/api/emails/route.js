@@ -16,9 +16,9 @@ export async function GET(request) {
             }
         })
         // console.log(user)
-        const lastMail = await db.mailId.findFirst({
+        const lastMail = await db.mailIdLog.findFirst({
             where: {
-                userId: user.id
+                userRefId: user.id
             },
             orderBy: {
                 createdAt: "desc",
@@ -49,11 +49,11 @@ export async function GET(request) {
             return new NextResponse(JSON.stringify({ message: "No latest emails to save" }), { status: 200 });
         }
 
-        await db.mailId.createMany({
+        await db.mailIdLog.createMany({
             data: messageIds.map((mail) => ({
                 mailId: mail.id,
                 threadId: mail.threadId,
-                userId: user.id,
+                userRefId: user.id,
             })),
             skipDuplicates: true,
         });

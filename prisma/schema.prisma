@@ -23,15 +23,15 @@ model User {
   credits         Int              @default(30)
   createdAt       DateTime         @default(now())
   updatedAt       DateTime         @updatedAt
-  applications    Application[]
+  applicationRefs Application[]
   UserPreferences UserPreferences?
-  MailId          MailId[]
+  mailRefs        MailIdLog[]
 }
 
 model Application {
-  id        String   @id @default(cuid())
-  userId    String
-  user      User     @relation(fields: [userId], references: [id])
+  id        String    @id @default(cuid())
+  userRefId String
+  userRef   User      @relation(fields: [userRefId], references: [id])
   jobTitle  String
   company   String
   jobId     String?
@@ -41,14 +41,16 @@ model Application {
   notes     String?
   jobType   String
   appliedAt DateTime
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  mailRefId String
+  mailRef   MailIdLog @relation(fields: [mailRefId], references: [mailId])
 }
 
 model UserPreferences {
-  id     String @id @default(cuid())
-  userId String @unique
-  user   User   @relation(fields: [userId], references: [id])
+  id        String @id @default(cuid())
+  userRefId String @unique
+  userRef   User   @relation(fields: [userRefId], references: [id])
 
   syncFrequency         Int     @default(6)
   emailNotifications    Boolean @default(true)
@@ -58,16 +60,17 @@ model UserPreferences {
   updatedAt DateTime @updatedAt
 }
 
-model MailId {
+model MailIdLog {
   id       String     @id @default(cuid())
   mailId   String     @unique
   threadId String
   status   MailStatus @default(pending)
 
-  userId    String
-  user      User     @relation(fields: [userId], references: [id])
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  userRefId       String
+  userRef         User          @relation(fields: [userRefId], references: [id])
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  applicationRefs Application[]
 
   @@index([status])
 }
@@ -77,4 +80,6 @@ enum MailStatus {
   processing
   completed
   error
+  unable_to_analyze
+  non_job
 }
