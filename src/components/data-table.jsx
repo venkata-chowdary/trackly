@@ -19,7 +19,7 @@ import {
   IconPlus,
   IconNotebook,
 } from "@tabler/icons-react";
-import { RefreshCw } from "lucide-react";
+import { Loader, RefreshCw } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -153,6 +153,20 @@ export function DataTable({ data: initialData }) {
     pageIndex: 0,
     pageSize: 12,
   });
+  const [isSyncing, setIsSyncing] = React.useState(false)
+
+  async function handleClick() {
+    setIsSyncing(true)
+    try {
+      const res = await fetch("/api/emails");
+      const { message, status } = await res.json();
+      // alert(data.message)
+    } catch (error) {
+      console.error("Error fetching emails:", error);
+    } finally {
+      setIsSyncing(false)
+    }
+  }
 
   const table = useReactTable({
     data,
@@ -172,8 +186,8 @@ export function DataTable({ data: initialData }) {
   return (
     <div className="w-full flex flex-col gap-4">
       <div className="flex flex-row gap-4 justify-end">
-        <Button variant="outline" size="sm">
-          <RefreshCw /> Load
+        <Button variant="outline" size="sm" onClick={handleClick}>
+          {isSyncing ? <><Loader className="animate-spin" size={16}/> Syncing...</> : <><RefreshCw /> Sync Mails</>}
         </Button>
         <Button variant="outline" size="sm">
           <IconNotebook />

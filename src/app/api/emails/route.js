@@ -3,7 +3,6 @@ import { auth, clerkClient } from '@clerk/nextjs/server'
 import { NextResponse } from 'next/server'
 
 export async function GET(request) {
-
     try {
         const { userId } = await auth()
         const clerk = await clerkClient()
