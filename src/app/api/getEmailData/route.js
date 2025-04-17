@@ -100,12 +100,7 @@ export async function GET(request) {
             }
         })
 
-        const pendingEmails = await db.mailIdLog.findMany({
-            where: {
-                status: "pending",
-                userRefId: user.id
-            }
-        })
+        const pendingEmails = await db.mailIdLog.findMany({ where: { status: "pending", userRefId: user.id } })
 
         console.log("Pending Mails", pendingEmails?.length)
 

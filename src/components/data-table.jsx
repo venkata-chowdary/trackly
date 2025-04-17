@@ -19,7 +19,7 @@ import {
   IconPlus,
   IconNotebook,
 } from "@tabler/icons-react";
-import { Loader, RefreshCw } from "lucide-react";
+import { Loader, Loader2, RefreshCw } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -40,6 +40,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { toast } from "sonner";
 
 // Simplified Columns (removed extra components such as row selection and actions)
 const columns = [
@@ -144,7 +145,8 @@ const columns = [
   // },
 ];
 
-export function DataTable({ data: initialData }) {
+export function
+  DataTable({ data: initialData }) {
   const [data] = React.useState(initialData);
   const [columnVisibility, setColumnVisibility] = React.useState({});
   const [columnFilters, setColumnFilters] = React.useState([]);
@@ -161,6 +163,13 @@ export function DataTable({ data: initialData }) {
       const res = await fetch("/api/emails");
       const { message, status } = await res.json();
       // alert(data.message)
+
+      if (status === 202) {
+        toast(message)
+      } else {
+        toast(message)
+      }
+
     } catch (error) {
       console.error("Error fetching emails:", error);
     } finally {
@@ -187,7 +196,7 @@ export function DataTable({ data: initialData }) {
     <div className="w-full flex flex-col gap-4">
       <div className="flex flex-row gap-4 justify-end">
         <Button variant="outline" size="sm" onClick={handleClick}>
-          {isSyncing ? <><Loader className="animate-spin" size={16}/> Syncing...</> : <><RefreshCw /> Sync Mails</>}
+          {isSyncing ? <><Loader2 className="animate-spin" size={16} /> Syncing...</> : <><RefreshCw /> Sync Mails</>}
         </Button>
         <Button variant="outline" size="sm">
           <IconNotebook />

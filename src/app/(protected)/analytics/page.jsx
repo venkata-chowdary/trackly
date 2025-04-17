@@ -8,7 +8,7 @@ export default function AnalyticsPage() {
     async function handleClick() {
         try {
             const res = await fetch("/api/emails");
-            const data = await res.json();
+            const { message, status } = await res.json();
             // alert(data.message)
         } catch (error) {
             console.error("Error fetching emails:", error);
