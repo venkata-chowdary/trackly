@@ -5,7 +5,26 @@ import { GoogleGenAI } from "@google/genai";
 import { generatePrompt } from "@/lib/generatePrompt";
 import { extractEmailDetails } from "@/lib/extractEmailData";
 
-async function processMails(mail, googleAccessToken, user) {
+async function processMails(mail, clerk) {
+
+    const user = await db.user.findUnique({
+        where: {
+            id: mail.userRefId
+        }
+    })
+
+    if (!user) {
+        console.error(`❌ User not found for mail ${mail.mailId} with userRefId ${mail.userRefId}`);
+        await db.mailIdLog.update({
+            where: { mailId: mail.mailId },
+            data: { status: "error" },
+        });
+        return null;
+    }
+
+    const clerkResponse = await clerk.users.getUserOauthAccessToken(user.clerkUserId, "google")
+    const googleAccessToken = clerkResponse.data[0]?.token
+
 
     //gmail api processing
     let gmailData
@@ -32,6 +51,7 @@ async function processMails(mail, googleAccessToken, user) {
 
     const { emailBody, emailSnippet, emailSubject, emailContent, receivedDate } = extractEmailDetails(gmailData)
 
+    console.log(emailSnippet)
     //gemini - processing
     let jobApplicationData
     try {
@@ -43,68 +63,61 @@ async function processMails(mail, googleAccessToken, user) {
 
         const rawResponse = response.candidates[0].content.parts[0].text
         const cleanedResponse = rawResponse.replace(/^```json\n|\n```$/g, '');
-        jobApplicationData = JSON.parse(cleanedResponse)
+        // jobApplicationData = JSON.parse(cleanedResponse)
+        console.log(cleanedResponse)
     } catch (error) {
-        console.error("Error during Gemini API processing for mail", mail.mailId, error);
+        console.error(`⛔ Error during Gemini API processing for ${mail.mailId}:`, error);
         return null;
     }
 
-    // saving records to DB
+    // // saving records to DB
 
-    try {
-        const { type, jobTitle = "", company = "", platform = "", location = "", jobType = "", appliedAt, status = "" } = jobApplicationData
+    // try {
+    //     const { type, jobTitle = "", company = "", platform = "", location = "", jobType = "", appliedAt, status = "" } = jobApplicationData
 
-        if (type === "job") {
-            await db.application.create({
-                data: {
-                    userRefId: user.id,
-                    jobTitle,
-                    company,
-                    platform,
-                    location,
-                    jobType,
-                    appliedAt: isNaN((new Date(appliedAt)).getTime()) ? new Date().toISOString() : new Date(appliedAt).toISOString(),
-                    status: [status],
-                    mailRefId: mail.mailId
-                }
-            })
+    //     if (type === "job") {
+    //         await db.application.create({
+    //             data: {
+    //                 userRefId: user.id,
+    //                 jobTitle,
+    //                 company,
+    //                 platform,
+    //                 location,
+    //                 jobType,
+    //                 appliedAt: isNaN((new Date(appliedAt)).getTime()) ? new Date().toISOString() : new Date(appliedAt).toISOString(),
+    //                 status: [status],
+    //                 mailRefId: mail.mailId
+    //             }
+    //         })
 
-            await db.mailIdLog.update({ where: { mailId: mail.mailId }, data: { status: "completed" } })
-        }
-        else {
-            await db.mailIdLog.update({ where: { mailId: mail.mailId }, data: { status: jobType === "non_job" ? "non_job" : "unable_to_analyze" } })
-        }
+    //         await db.mailIdLog.update({ where: { mailId: mail.mailId }, data: { status: "completed" } })
+    //         console.log(`✅ Job entry created for mail: ${mail.mailId}`);
+    //     }
+    //     else if (type === "non_job") {
+    //         await db.mailIdLog.update({ where: { mailId: mail.mailId }, data: { status: "non_job" } });
+    //         console.log(`ℹ️ Skipped Mail ${mail.mailId} — classified as non-job`);
+    //     } else {
+    //         await db.mailIdLog.update({ where: { mailId: mail.mailId }, data: { status: "unable_to_analyze" }, });
+    //         console.log(`⚠️ Skipped Mail ${mail.mailId} — unable to analyze (Gemini unclear)`);
+    //     }
 
-        return jobApplicationData
-    } catch (error) {
-        console.error("Error during DB operation for mail", mail.mailId, error);
-        return null;
-    }
+    //     return jobApplicationData
+    // } catch (error) {
+    //     console.error(`⛔ Error saving data to DB for mail ${mail.mailId}:`, error);
+    //     return null;
+    // }
 }
 
 
 export async function GET(request) {
 
     try {
-        const { userId } = await auth()
-
-        if (!userId) return new NextResponse(JSON.stringify({ message: "unauthorised request" }), { status: 401 });
-
-        const clerk = await clerkClient()
-        const clerkResponse = await clerk.users.getUserOauthAccessToken(userId, "google")
-        const googleAccessToken = clerkResponse.data[0]?.token
-
-        const user = await db.user.findUnique({
-            where: {
-                clerkUserId: userId
-            }
-        })
-
-        const pendingEmails = await db.mailIdLog.findMany({ where: { status: "pending", userRefId: user.id } })
+        const pendingEmails = await db.mailIdLog.findMany({ where: { status: "pending" } })
 
         console.log("Pending Mails", pendingEmails?.length)
+        const clerk = await clerkClient()
 
-        const processingResults = await Promise.all(pendingEmails.map(mail => processMails(mail, googleAccessToken, user)))
+        const processingResults = await Promise.all(pendingEmails.map(mail => processMails(mail, clerk)))
 
         const result = processingResults.filter(result => result !== null)
         return new NextResponse(JSON.stringify({ data: result }), { status: 200 });
