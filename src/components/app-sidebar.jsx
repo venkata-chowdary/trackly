@@ -5,11 +5,13 @@ import {
   IconCalendar,
   IconCamera,
   IconChartBar,
+  IconCreditCard,
   IconDashboard,
   IconFileAi,
   IconFileAnalytics,
   IconFileDescription,
   IconHelp,
+  IconUser,
 } from "@tabler/icons-react"
 
 import { NavDocuments } from "@/components/nav-documents"
@@ -47,6 +49,12 @@ const data = {
       url: "/timeline",
       icon: IconCalendar,
     },
+    {
+      title: "Credits",
+      url: "/pricing",
+      icon: IconCreditCard, // or IconCoins if using Lucide icons
+    }
+    
   ],
   navClouds: [
     {
