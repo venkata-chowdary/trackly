@@ -1,24 +1,28 @@
 "use client"
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function PaymentRedirectPage() {
-    const router = useRouter();
+    const searchParams = useSearchParams();
+    const [paymentStatus, setPaymentStatus] = useState(null)
 
     useEffect(() => {
-        const { payment_request_id, payment_status } = router.query;
-
+        const payment_status = searchParams.get("payment_status")
+        setPaymentStatus(paymentStatus)
         if (payment_status === 'Credit') {
             console.log('Payment Successful!');
         } else {
             console.log('Payment Failed or Canceled!');
         }
-    }, [router.query]);
+    }, [searchParams]);
 
+    if(paymentStatus===null){
+        return <p>Loading...</p>
+    }
     return (
         <div>
-            {router.query.payment_status === 'Credit' ? (
+            {paymentStatus === 'Credit' ? (
                 <div>
                     <h2>Payment Successful! Thank you for your purchase.</h2>
                     <Link href={"/dashboard"}>Go To Dashboard</Link>
