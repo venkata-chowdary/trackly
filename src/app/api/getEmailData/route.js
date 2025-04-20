@@ -51,7 +51,6 @@ async function processMails(mail, clerk) {
 
     const { emailBody, emailSnippet, emailSubject, emailContent, receivedDate } = extractEmailDetails(gmailData)
 
-    console.log(emailSnippet)
     //gemini - processing
     let jobApplicationData
     try {
@@ -63,6 +62,7 @@ async function processMails(mail, clerk) {
 
         const rawResponse = response.candidates[0].content.parts[0].text
         const cleanedResponse = rawResponse.replace(/^```json\n|\n```$/g, '');
+
         // jobApplicationData = JSON.parse(cleanedResponse)
         console.log(cleanedResponse)
     } catch (error) {

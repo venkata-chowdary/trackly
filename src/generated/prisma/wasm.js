@@ -165,6 +165,26 @@ exports.Prisma.MailIdLogScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.PaymentLogScalarFieldEnum = {
+  id: 'id',
+  userRefId: 'userRefId',
+  amount: 'amount',
+  buyer_email: 'buyer_email',
+  buyer_name: 'buyer_name',
+  buyer_phone_number: 'buyer_phone_number',
+  currency: 'currency',
+  fees: 'fees',
+  longurl: 'longurl',
+  mac: 'mac',
+  payment_id: 'payment_id',
+  payment_request_id: 'payment_request_id',
+  purpose: 'purpose',
+  shorturl: 'shorturl',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -188,11 +208,17 @@ exports.MailStatus = exports.$Enums.MailStatus = {
   non_job: 'non_job'
 };
 
+exports.PaymentStatus = exports.$Enums.PaymentStatus = {
+  Credit: 'Credit',
+  Failed: 'Failed'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Application: 'Application',
   UserPreferences: 'UserPreferences',
-  MailIdLog: 'MailIdLog'
+  MailIdLog: 'MailIdLog',
+  PaymentLog: 'PaymentLog'
 };
 
 /**
