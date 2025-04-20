@@ -12,6 +12,9 @@ export default function TermsAndConditions() {
                 <li>We may suspend or terminate your access for violations of these terms.</li>
                 <li>Subscription fees (if any) are non-refundable once processed.</li>
             </ul>
+            <p className="text-sm text-gray-600 mt-6">
+                Trackly is a product under <strong>Immani Industries</strong>, registered under GST number <strong>37ACJPI2322L2ZK</strong>. All payments and billing are managed by this entity, operated by proprietor <strong>Q.O. Pushpa</strong>.
+            </p>
         </div>
     );
 }
