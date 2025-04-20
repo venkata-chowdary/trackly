@@ -12,7 +12,7 @@ export default async function Navbar() {
                     </h1>
                 </Link>
                 <div className='flex items-center gap-4 max-sm:gap-3'>
-                    <div className="flex flex-col gap-2 text-sm text-muted-foreground">
+                    <div className="flex flex-row gap-2 text-sm text-muted-foreground">
                         <Link href="/privacy-policy">Privacy Policy</Link>
                         <Link href="/terms-and-conditions">Terms and Conditions</Link>
                         <Link href="/cancellation-and-refund">Cancellation & Refund</Link>
